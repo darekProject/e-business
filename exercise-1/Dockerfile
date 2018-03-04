@@ -18,8 +18,8 @@ RUN echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.lis
     apt-get update && \
     apt-get install sbt -y
 
-RUN mkdir /app
-WORKDIR /app
+RUN mkdir /scala_app
+WORKDIR /scala_app
 
 # copy file to workdir 
 COPY ./build.sbt ./
