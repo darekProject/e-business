@@ -18,6 +18,14 @@ RUN echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.lis
     apt-get update && \
     apt-get install sbt -y
 
+#install mysql 
+RUN apt-get update
+RUN export DEBIAN_FRONTEND=noninteractive
+ENV MYSQL_ROOT_PASS root
+RUN echo "mysql-server mysql-server/root_password password ${MYSQL_ROOT_PASS}" | debconf-set-selections  && \
+    echo "mysql-server mysql-server/root_password_again password ${MYSQL_ROOT_PASS}" | debconf-set-selections 
+RUN apt-get -q -y install mysql-server mysql-client
+
 RUN mkdir /scala_app
 WORKDIR /scala_app
 
