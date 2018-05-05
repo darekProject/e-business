@@ -3,7 +3,6 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.ProductController.index
 POST    /addproduct                 controllers.ProductController.addProduct
 GET     /products                   controllers.ProductController.getProducts
 

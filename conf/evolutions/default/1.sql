@@ -5,15 +5,6 @@ create table "category" (
   "name" varchar not null
 );
 
-create table "product" (
-  "id" integer not null primary key autoincrement,
-  "name" varchar not null,
-  "description" text not null,
-  "keyWords" text not null,
-  category int not null,
-  foreign key(category) references category(id)
-);
-
 create table "orders" (
   "id" integer not null primary key autoincrement,
   "address" varchar not null,
@@ -22,6 +13,15 @@ create table "orders" (
   "sent" varchar not null,
   product integer no null,
   foreign key(product) references product(id)
+);
+
+create table "product" (
+  "id" integer not null primary key autoincrement,
+  "name" varchar not null,
+  "description" varchar not null,
+  "keyWords" varchar not null,
+  category int not null,
+  foreign key(category) references category(id)
 );
 
 create table "user" (
@@ -36,7 +36,7 @@ create table "user" (
 
 # --- !Downs
 
-drop table "product" if exists;
-drop table "category" if exists;
-drop table "orders" if exists;
-drop table "user" if exists;
+drop table if exists "orders";
+drop table if exists "product";
+drop table if exists "user";
+drop table if exists "category";
