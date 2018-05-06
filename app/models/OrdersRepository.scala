@@ -29,17 +29,19 @@ class OrdersRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(impli
 
     def products = column[Int]("products")
 
-    def * : ProvenShape[Orders] = (id, address, dataSend, fee, sent, products) <> ((Orders.apply _).tupled, Orders.unapply)
+    def user = column[Int]("user")
+
+    def * : ProvenShape[Orders] = (id, address, dataSend, fee, sent, products, user) <> ((Orders.apply _).tupled, Orders.unapply)
 
   }
 
   val orders = TableQuery[OrdersTable]
 
-  def create(address: String, dataSend: String, fee: Float, sent: Boolean, products: Int): Future[Orders] = db.run {
-    (orders.map(o => (o.address, o.dataSend, o.fee, o.sent, o.products))
+  def create(address: String, dataSend: String, fee: Float, sent: Boolean, products: Int, user: Int): Future[Orders] = db.run {
+    (orders.map(o => (o.address, o.dataSend, o.fee, o.sent, o.products, o.user))
       returning orders.map(_.id)
-      into { case ((`address`, `dataSend`, `fee`, `sent`, `products`), id) => Orders(id, address, dataSend, fee, sent, products) }
-      ) += (address, dataSend, fee, sent, products)
+      into { case ((`address`, `dataSend`, `fee`, `sent`, `products`, `user`), id) => Orders(id, address, dataSend, fee, sent, products, user) }
+      ) += (address, dataSend, fee, sent, products, user)
   }
 
   def list(): Future[Seq[Orders]] = db.run {
