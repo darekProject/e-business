@@ -2,16 +2,19 @@ package controllers
 
 import javax.inject._
 import models._
-import play.api.data.Form
-import play.api.data.Forms._
-import play.api.data.validation.Constraints._
-import play.api.i18n._
+
 import play.api.libs.json.Json.toJson
 import play.api.libs.json._
 import play.api.mvc._
 
+import scala.collection.mutable.ArrayBuffer
 import scala.concurrent.{ExecutionContext, Future}
-import scala.util.{Failure, Success}
+
+case class KeySearch(key: String)
+
+object KeySearch {
+  implicit val keySearchFormat: OFormat[KeySearch] = Json.format[KeySearch]
+}
 
 class ProductController @Inject()(productsRepo: ProductRepository, categoryRepo: CategoryRepository,
                                   cc: MessagesControllerComponents
@@ -45,6 +48,33 @@ class ProductController @Inject()(productsRepo: ProductRepository, categoryRepo:
     productsRepo.list().map { products =>
       Ok(toJson(products))
     }
+  }
+
+  def getProductsByKeyWords: Action[JsValue] = Action.async(parse.json) { implicit request =>
+
+    val keyFromJson: JsResult[KeySearch] = Json.fromJson[KeySearch](request.body)
+    var productsByKeyWords = new ArrayBuffer[Product]()
+    var key = new ArrayBuffer[StringBuffer]()
+
+    keyFromJson match {
+      case JsSuccess(k: KeySearch, path: JsPath) =>
+        k.key.split(",").foreach(k => {
+          key += new StringBuffer(k)
+        })
+    }
+
+    productsRepo.list().map { products =>
+      products.foreach(product => {
+        key.foreach(k => {
+          if (product.keyWords.contentEquals(k)) {
+            productsByKeyWords += product
+          }
+        })
+
+      })
+    }
+
+    Future.successful(Ok(toJson(productsByKeyWords)))
   }
 }
 

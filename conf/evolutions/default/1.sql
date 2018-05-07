@@ -11,8 +11,10 @@ create table "orders" (
   "dataSend" date not null,
   "fee" float not null,
   "sent" varchar not null,
-  product integer no null,
-  foreign key(product) references product(id)
+  products integer no null,
+  user integer no null,
+  foreign key(products) references product(id),
+  foreign key(user) references user(id)
 );
 
 create table "product" (

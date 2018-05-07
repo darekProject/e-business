@@ -5,6 +5,7 @@
 # Products
 POST        /addproduct           controllers.ProductController.addProduct
 GET         /products             controllers.ProductController.getProducts
+GET         /products/key         controllers.ProductController.getProductsByKeyWords
 
 # Orders
 POST        /addorders            controllers.OrdersController.addOrders()
