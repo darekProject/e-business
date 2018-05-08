@@ -9,6 +9,7 @@ import {Route, BrowserRouter} from 'react-router-dom';
 
 import './index.css';
 import App from './container/App';
+import Header from './container/Header/Header';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
@@ -17,7 +18,7 @@ ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
             <Fragment>
-                <Route path="/" component={App}/>
+                <Route path="/" component={Header}/>
             </Fragment>
         </BrowserRouter>
     </Provider>
