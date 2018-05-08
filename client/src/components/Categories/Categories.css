@@ -8,8 +8,8 @@
     margin-left: 50px; }
   .categories-wrapper .category {
     width: 250px;
-    border: 2px solid #5BADDF;
-    color: #5BADDF;
+    border: 2px solid #eeeeee;
+    color: #000000;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
     height: 50px;
@@ -21,9 +21,9 @@
     cursor: pointer;
     text-transform: uppercase; }
     .categories-wrapper .category:hover {
-      color: #1149A4;
+      color: #000000;
       font-weight: 600; }
   .categories-wrapper .category.active {
-    background: #5BADDF;
+    background: #e2e2e2;
     color: #ffffff;
     font-weight: 600; }
