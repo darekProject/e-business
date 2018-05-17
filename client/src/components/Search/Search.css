@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700");
+.search-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px; }
+  .search-box h2 {
+    font-family: "Montserrat", sans-serif;
+    margin-bottom: 0;
+    margin-right: 20px;
+    font-size: 20px; }
+  .search-box input {
+    width: 350px;
+    height: 40px;
+    border: 1px  solid #eeeeee;
+    border-radius: 5px;
+    padding-left: 20px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px; }
+  .search-box button {
+    margin-left: 20px; }
