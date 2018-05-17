@@ -18,7 +18,7 @@ ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
             <Fragment>
-                <Route path="/" component={Header}/>
+                <Route path="/" component={App}/>
             </Fragment>
         </BrowserRouter>
     </Provider>
