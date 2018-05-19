@@ -31,7 +31,8 @@ class AddProductForm extends Component {
                 <div className="row">
                     <div className="col-lg-12 add-product-box">
                         <h2>Add Products:</h2>
-                        <form id="addProduct" onSubmit={handleSubmit((values) => this.props.handleSubmitProductForm(values))}>
+                        <form id="addProduct"
+                              onSubmit={handleSubmit((values) => this.props.handleSubmitProductForm(values))}>
                             <div className="form-box">
                                 <label>Name:</label>
                                 <div>
@@ -60,6 +61,15 @@ class AddProductForm extends Component {
                                 </div>
                             </div>
                             <div className="form-box">
+                                <label>Img url:</label>
+                                <div>
+                                    <Field type="text"
+                                           name="imgUrl"
+                                           component={renderField}
+                                           placeholder="asus_zenfone.png"/>
+                                </div>
+                            </div>
+                            <div className="form-box">
                                 <label>Description:</label>
                                 <div>
                                     <Field type="text"
@@ -85,6 +95,8 @@ const validate = values => {
         errors.keywords = 'Give any key words!'
     } else if (!values.category) {
         errors.category = 'Give a category!'
+    } else if (!values.imgUrl) {
+        errors.imgUrl = 'Give an img url!'
     } else if (!values.description) {
         errors.description = 'Give a description!'
     }

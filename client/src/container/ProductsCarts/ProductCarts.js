@@ -4,53 +4,9 @@ import {connect} from 'react-redux';
 import * as actions from '../../actions';
 
 import ProductCart from "../../components/ProductCart/ProductCart";
+import Preloader from '../../components/Preloader/Preloader';
 
 import './ProductsCarts.css';
-
-const MOCK_PRODUCTS = [
-    {
-        id: 1,
-        title: "Asus Zenfone 2",
-        imgUrl: 'asus_zenfone_5.jpg',
-        cost: '350$',
-        freeDelivery: false
-    },
-    {
-        id: 2,
-        title: "Asus Zenfone 5",
-        imgUrl: 'asus_zenfone_5.jpg',
-        cost: '1200$',
-        freeDelivery: true
-    },
-    {
-        id: 3,
-        title: "Asus Zenfone 1",
-        imgUrl: 'asus_zenfone_5.jpg',
-        cost: '450$',
-        freeDelivery: false
-    },
-    {
-        id: 4,
-        title: "Samsung Galaxy 3",
-        imgUrl: 'asus_zenfone_5.jpg',
-        cost: '1450$',
-        freeDelivery: true
-    },
-    {
-        id: 5,
-        title: "Asus Zenfone 1",
-        imgUrl: 'asus_zenfone_5.jpg',
-        cost: '450$',
-        freeDelivery: false
-    },
-    {
-        id: 5,
-        title: "Asus Zenfone 1",
-        imgUrl: 'asus_zenfone_5.jpg',
-        cost: '4450$',
-        freeDelivery: true
-    },
-];
 
 class ProductCarts extends Component {
 
@@ -62,7 +18,7 @@ class ProductCarts extends Component {
 
     getInitialState = () => {
         return {
-            products: MOCK_PRODUCTS
+            allProducts: null
         }
     };
 
@@ -71,26 +27,37 @@ class ProductCarts extends Component {
     };
 
     renderProducts = () => {
-        return this.state.products.map(product => {
-            const {
-                id,
-                title,
-                imgUrl,
-                cost,
-                freeDelivery
-            } = product;
+        if (this.props.allProducts) {
+            const {allProducts} = this.props;
+            this.state.allProducts = allProducts;
 
-            const props = {
-                idProduct: id,
-                title,
-                imgUrl,
-                cost,
-                freeDelivery,
-                handleAddProductToShoppingCarts: this.handleAddProductToShoppingCarts
-            };
-            return <ProductCart {...props} />
-        })
+            return allProducts.map(product => {
+                const {
+                    id,
+                    title,
+                    imgUrl,
+                    cost,
+                    freeDelivery
+                } = product;
+
+                const props = {
+                    idProduct: id,
+                    title,
+                    imgUrl,
+                    cost,
+                    freeDelivery,
+                    handleAddProductToShoppingCarts: this.handleAddProductToShoppingCarts
+                };
+                return <ProductCart {...props} />
+            })
+        } else {
+            return <Preloader/>
+        }
     };
+
+    componentDidMount() {
+        this.props.getProducts();
+    }
 
     render() {
         return <div className="container all-products">
@@ -102,13 +69,21 @@ class ProductCarts extends Component {
 }
 
 ProductCarts.propTypes = {
-    addProductToShoppingCart: PropTypes.func
+    addProductToShoppingCart: PropTypes.func,
+    getProducts: PropTypes.func
 };
 
 ProductCarts.defaultTypes = {
     addProductToShoppingCart: () => {
+    },
+    getProducts: () => {
     }
 };
 
+const mapStateToProps = state => {
+    return {
+        allProducts: state.product.allProducts
+    }
+};
 
-export default connect(null, actions)(ProductCarts);
+export default connect(mapStateToProps, actions)(ProductCarts);

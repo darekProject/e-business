@@ -1,4 +1,4 @@
-import {ADD_PRODUCT, ADD_PRODUCT_TO_SHOPPING_CARTS} from "../actions/type";
+import {ADD_PRODUCT, ADD_PRODUCT_TO_SHOPPING_CARTS, GET_PRODUCT} from "../actions/type";
 
 export default function (state = {}, action) {
     switch (action.type) {
@@ -11,6 +11,11 @@ export default function (state = {}, action) {
             return {
                 ...state,
                 productAddedToShoppingCarts: action.payload
+            };
+        case GET_PRODUCT:
+            return {
+                ...state,
+                allProducts: action.payload
             };
         default:
             return state;
