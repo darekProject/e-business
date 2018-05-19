@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import * as actions from '../../actions';
 
 import ProductCart from "../../components/ProductCart/ProductCart";
 
@@ -63,6 +66,10 @@ class ProductCarts extends Component {
         }
     };
 
+    handleAddProductToShoppingCarts = (idProduct) => {
+        this.props.addProductToShoppingCart(idProduct);
+    };
+
     renderProducts = () => {
         return this.state.products.map(product => {
             const {
@@ -78,7 +85,8 @@ class ProductCarts extends Component {
                 title,
                 imgUrl,
                 cost,
-                freeDelivery
+                freeDelivery,
+                handleAddProductToShoppingCarts: this.handleAddProductToShoppingCarts
             };
             return <ProductCart {...props} />
         })
@@ -93,4 +101,14 @@ class ProductCarts extends Component {
     }
 }
 
-export default ProductCarts;
+ProductCarts.propTypes = {
+    addProductToShoppingCart: PropTypes.func
+};
+
+ProductCarts.defaultTypes = {
+    addProductToShoppingCart: () => {
+    }
+};
+
+
+export default connect(null, actions)(ProductCarts);

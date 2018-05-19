@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 
 import "./ProductCart.css"
 
@@ -17,7 +16,7 @@ const ProductCart = (props) => {
                     <i className="fas fa-star"></i>
                 </div>
                 <footer>
-                    <button className="btn-buy">
+                    <button onClick={() => props.handleAddProductToShoppingCarts(props.idProduct)} className="btn-buy">
                         <img src="/images/shoppingCarts.png" alt=""/>
                     </button>
                     <div className="cost">

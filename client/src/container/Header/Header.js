@@ -1,4 +1,6 @@
 import React, {Component, Fragment} from 'react';
+import {connect} from 'react-redux';
+import * as actions from '../../actions';
 
 import Categories from "../../components/Categories/Categories";
 import Search from "../../components/Search/Search";
@@ -7,6 +9,34 @@ import ShoppingCart from '../../components/ShoppingCart/ShoppingCart';
 import './Header.css';
 
 class Header extends Component {
+
+    constructor() {
+        super();
+
+        this.state = this.getInitialState();
+    }
+
+    getInitialState = () => {
+        return {
+            amountAddedProductToCart: this.getAmountAddedProducts()
+        }
+    };
+
+    getAmountAddedProducts = () => {
+        const addedProduct = JSON.parse(localStorage.getItem('productInShoppingCart'));
+        return addedProduct ? addedProduct.length : 0;
+    };
+
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.productAddedToShoppingCarts) {
+            const addedProduct = JSON.parse(localStorage.getItem('productInShoppingCart'));
+            const amountAddedProduct = addedProduct.length;
+
+            this.setState({amountAddedProductToCart: amountAddedProduct});
+        }
+    };
+
     render() {
         return <Fragment>
             <div className="container title-cart-box">
@@ -20,7 +50,7 @@ class Header extends Component {
                             <button>
                                 <i className="far fa-user"></i>
                             </button>
-                            <ShoppingCart amountProducts="3"/>
+                            <ShoppingCart amountProducts={this.state.amountAddedProductToCart}/>
                         </div>
                     </div>
                 </div>
@@ -31,4 +61,10 @@ class Header extends Component {
     }
 }
 
-export default Header;
+const mapStateToProps = state => {
+    return {
+        productAddedToShoppingCarts: state.product.productAddedToShoppingCarts
+    }
+};
+
+export default connect(mapStateToProps, actions)(Header);
