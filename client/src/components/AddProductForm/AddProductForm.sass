@@ -1,0 +1,53 @@
+@import "../../styles/_variable"
+
+.add-product-box
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
+  margin-top: 50px
+  h2
+    font-family: $font
+  form
+    font-family: $font
+    margin-top: 50px
+    display: flex
+    flex-direction: column
+    align-items: center
+    .form-box
+      display: flex
+      align-items: center
+      div
+        display: flex
+        flex-direction: column
+        color: red
+        font-size: 12px
+        position: relative
+        span
+          position: absolute
+          bottom: -20px
+          left: 15px
+    .form-box + .form-box
+      margin-top: 35px
+    button
+      font-weight: 600
+      margin-top: 45px
+    label
+      margin-right: 20px
+      width: 100px
+      font-weight: 600
+    input
+      height: 40px
+      width: 350px
+    textarea
+      width: 350px
+      height: 200px
+    input, textarea
+      border-radius: 3px
+      border: 1px solid #e2e2e2
+      padding-left: 15px
+      font-size: 13px
+    .form-box:nth-child(4)
+      display: flex
+      align-items: flex-start
+
