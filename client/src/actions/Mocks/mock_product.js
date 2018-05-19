@@ -5,7 +5,8 @@ export const MOCK_PRODUCTS = [
         imgUrl: 'asus_zenfone_5.jpg',
         cost: '350$',
         freeDelivery: false,
-        category: 'smartphone'
+        category: 'smartphone',
+        keywords: 'smartphone, asus zenfone 2, asus, zenfone'
     },
     {
         id: 2,
@@ -13,7 +14,8 @@ export const MOCK_PRODUCTS = [
         imgUrl: 'asus_zenfone_5.jpg',
         cost: '1200$',
         freeDelivery: true,
-        category: 'smartphone'
+        category: 'smartphone',
+        keywords: 'smartphone, asus zenfone 5, asus, zenfone'
     },
     {
         id: 3,
@@ -21,7 +23,8 @@ export const MOCK_PRODUCTS = [
         imgUrl: 'asus_zenfone_5.jpg',
         cost: '450$',
         freeDelivery: false,
-        category: 'smartphone'
+        category: 'smartphone',
+        keywords: 'smartphone, asus zenfone 1, asus, zenfone'
     },
     {
         id: 4,
@@ -29,7 +32,8 @@ export const MOCK_PRODUCTS = [
         imgUrl: 'asus_zenfone_5.jpg',
         cost: '1450$',
         freeDelivery: true,
-        category: 'smartphone'
+        category: 'smartphone',
+        keywords: 'smartphone, samsung galaxy 3, samsung, galaxy'
     },
     {
         id: 5,
@@ -37,15 +41,17 @@ export const MOCK_PRODUCTS = [
         imgUrl: 'asus_zenfone_5.jpg',
         cost: '450$',
         freeDelivery: false,
-        category: 'smartphone'
+        category: 'smartphone',
+        keywords: 'smartphone, asus zenfone 1, asus, zenfone'
     },
     {
         id: 5,
-        title: "Asus Zenfone 1",
+        title: "Asus Zenfone ZX",
         imgUrl: 'asus_zenfone_5.jpg',
         cost: '4450$',
         freeDelivery: true,
-        category: 'smartphone'
+        category: 'smartphone',
+        keywords: 'smartphone, asus zenfone ZX, asus, zenfone'
     },
     {
         id: 4,
@@ -53,7 +59,8 @@ export const MOCK_PRODUCTS = [
         imgUrl: 'asus_zenfone_5.jpg',
         cost: '1450$',
         freeDelivery: true,
-        category: 'smartphone'
+        category: 'smartphone',
+        keywords: 'smartphone, samsung galaxy 3, samsung, galaxy'
     },
     {
         id: 5,
@@ -61,7 +68,8 @@ export const MOCK_PRODUCTS = [
         imgUrl: 'asus_zenfone_5.jpg',
         cost: '450$',
         freeDelivery: false,
-        category: 'smartphone'
+        category: 'smartphone',
+        keywords: 'smartphone, asus zenfone 1, asus, zenfone'
     },
     {
         id: 6,
@@ -69,7 +77,8 @@ export const MOCK_PRODUCTS = [
         imgUrl: 'laptops.jpg',
         cost: '1450$',
         freeDelivery: true,
-        category: 'laptops'
+        category: 'laptops',
+        keywords: 'laptops, asus zenfone 1, asus, laptops'
     },
     {
         id: 8,
@@ -77,6 +86,7 @@ export const MOCK_PRODUCTS = [
         imgUrl: 'ram.jpg',
         cost: '150$',
         freeDelivery: true,
-        category: 'accessories'
+        category: 'accessories',
+        keywords: 'accessories, Kingston 4GB 1600MHz, Kingston, ram'
     }
 ];

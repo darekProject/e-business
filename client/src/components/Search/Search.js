@@ -7,7 +7,7 @@ import './Search.css';
 
 const renderField = ({input, placeholder, type, meta: {touched, error, warning}}) => (
     <Fragment>
-        <input placeholder={placeholder} type={type}/>
+        <input {...input} placeholder={placeholder} type={type}/>
         {touched && ((error && <span className="error-info">{error}</span>) || (warning &&
             <span className="error-info">{warning}</span>))}
     </Fragment>
@@ -23,7 +23,7 @@ class Search extends Component {
                 <div className="row">
                     <div className="col-lg-12 search-box">
                         <h2>Search Products:</h2>
-                        <form id="search" onSubmit={handleSubmit((values) => console.log(values))}>
+                        <form id="search" onSubmit={handleSubmit((values) => this.props.handleSubmitSearch(values))}>
                             <Field type="text"
                                    name="keywords"
                                    component={renderField}

@@ -7,6 +7,7 @@ import ProductCart from "../../components/ProductCart/ProductCart";
 import Preloader from '../../components/Preloader/Preloader';
 
 import './ProductsCarts.css';
+import NoProduct from "../../components/NoProducts/NoProducts";
 
 class ProductCarts extends Component {
 
@@ -19,7 +20,8 @@ class ProductCarts extends Component {
     getInitialState = () => {
         return {
             allProducts: null,
-            filteredProducts: null
+            filteredProducts: null,
+            noProducts: null
         }
     };
 
@@ -28,9 +30,11 @@ class ProductCarts extends Component {
     };
 
     renderProducts = () => {
-        const {allProducts, filteredProducts} = this.state;
+        const {allProducts, filteredProducts, noProducts} = this.state;
 
-        if (allProducts && !filteredProducts) {
+        if (noProducts) {
+            return <NoProduct information={'No products. You have to change key words!'}/>
+        } else if (allProducts && !filteredProducts) {
             return allProducts.map(product => {
                 const {
                     id,
@@ -84,9 +88,40 @@ class ProductCarts extends Component {
             rightProducts = allProducts.filter(product => product.category === category);
         }
 
-        this.setState({
-            filteredProducts: rightProducts
+        if (rightProducts.length > 0) {
+            this.setState({
+                filteredProducts: rightProducts
+            });
+        } else {
+            this.setState({
+                noProducts: true
+            });
+        }
+
+    };
+
+    filterProductsByKeyWords = keyWords => {
+        const {allProducts} = this.state;
+
+        const rightProducts = [];
+
+        allProducts.map(product => {
+            const productHasKey = product.keywords.split(',');
+            const hasGoodKey = productHasKey.find(key => key.toLocaleLowerCase().trim() === keyWords.toLocaleLowerCase().trim());
+            if (hasGoodKey) {
+                rightProducts.push(product)
+            }
         });
+
+        if (rightProducts.length > 0) {
+            this.setState({
+                filteredProducts: rightProducts
+            });
+        } else {
+            this.setState({
+                noProducts: true
+            });
+        }
     };
 
     componentDidMount() {
@@ -95,7 +130,7 @@ class ProductCarts extends Component {
 
     componentWillReceiveProps(nextProps) {
 
-        const {allProducts, sortByCategory} = nextProps;
+        const {allProducts, sortByCategory, sortByKeyWords} = nextProps;
 
         if (allProducts) {
             this.setState({
@@ -105,6 +140,10 @@ class ProductCarts extends Component {
 
         if (sortByCategory) {
             this.filterDataByCategory(sortByCategory);
+        }
+
+        if (sortByKeyWords) {
+            this.filterProductsByKeyWords(sortByKeyWords);
         }
 
     }
@@ -135,7 +174,8 @@ ProductCarts.defaultTypes = {
 const mapStateToProps = state => {
     return {
         allProducts: state.product.allProducts,
-        sortByCategory: state.product.sortByCategory
+        sortByCategory: state.product.sortByCategory,
+        sortByKeyWords: state.product.sortByKeyWords
     }
 };
 

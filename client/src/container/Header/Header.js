@@ -27,6 +27,9 @@ class Header extends Component {
         return addedProduct ? addedProduct.length : 0;
     };
 
+    handleSubmitSearch = ({keywords}) => {
+        this.props.filterProductsByKeyWords(keywords);
+    };
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.productAddedToShoppingCarts) {
@@ -55,7 +58,7 @@ class Header extends Component {
                     </div>
                 </div>
             </div>
-            <Search/>
+            <Search handleSubmitSearch={(values) => this.handleSubmitSearch(values)}/>
             <Categories/>
         </Fragment>
     }

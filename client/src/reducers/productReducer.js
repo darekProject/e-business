@@ -1,4 +1,10 @@
-import {ADD_PRODUCT, ADD_PRODUCT_TO_SHOPPING_CARTS, FILTER_PRODUCTS_BY_CATEGORY, GET_PRODUCT} from "../actions/type";
+import {
+    ADD_PRODUCT,
+    ADD_PRODUCT_TO_SHOPPING_CARTS,
+    FILTER_PRODUCTS_BY_CATEGORY,
+    FILTER_PRODUCTS_BY_KEYWORDS,
+    GET_PRODUCT
+} from "../actions/type";
 
 export default function (state = {}, action) {
     switch (action.type) {
@@ -17,11 +23,24 @@ export default function (state = {}, action) {
                 ...state,
                 allProducts: action.payload
             };
-        case FILTER_PRODUCTS_BY_CATEGORY:
+        case FILTER_PRODUCTS_BY_CATEGORY: {
+            const newState = Object.assign({}, state);
+            newState.sortByKeyWords = null;
+
             return {
-                ...state,
+                ...newState,
                 sortByCategory: action.payload
             };
+        }
+        case FILTER_PRODUCTS_BY_KEYWORDS: {
+            const newState = Object.assign({}, state);
+            newState.sortByCategory = null;
+
+            return {
+                ...newState,
+                sortByKeyWords: action.payload
+            };
+        }
         default:
             return state;
     }

@@ -4,6 +4,7 @@ import {
     ADD_PRODUCT_TO_SHOPPING_CARTS,
     FAILED_PRODUCT,
     FILTER_PRODUCTS_BY_CATEGORY,
+    FILTER_PRODUCTS_BY_KEYWORDS,
     GET_PRODUCT
 } from "./type";
 import {MOCK_PRODUCTS} from './Mocks/mock_product';
@@ -61,13 +62,9 @@ export const getProducts = () => dispatch => {
 };
 
 export const filterProductsByCategory = category => dispatch => {
+    dispatch({type: FILTER_PRODUCTS_BY_CATEGORY, payload: category});
+};
 
-    try {
-
-        dispatch({type: FILTER_PRODUCTS_BY_CATEGORY, payload: category})
-
-    } catch (e) {
-        dispatch(failedProduct('Error! Something was wrong during load products!'))
-    }
-
+export const filterProductsByKeyWords = keywords => dispatch => {
+    dispatch({type: FILTER_PRODUCTS_BY_KEYWORDS, payload: keywords});
 };
