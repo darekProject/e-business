@@ -1,53 +1,14 @@
 import axios from 'axios';
-import {ADD_PRODUCT, ADD_PRODUCT_TO_SHOPPING_CARTS, FAILED_PRODUCT, GET_PRODUCT} from "./type";
+import {
+    ADD_PRODUCT,
+    ADD_PRODUCT_TO_SHOPPING_CARTS,
+    FAILED_PRODUCT,
+    FILTER_PRODUCTS_BY_CATEGORY,
+    GET_PRODUCT
+} from "./type";
+import {MOCK_PRODUCTS} from './Mocks/mock_product';
 
 const ROOT_URL = 'http://localhost:5050';
-
-const MOCK_PRODUCTS = [
-    {
-        id: 1,
-        title: "Asus Zenfone 2",
-        imgUrl: 'asus_zenfone_5.jpg',
-        cost: '350$',
-        freeDelivery: false
-    },
-    {
-        id: 2,
-        title: "Asus Zenfone 5",
-        imgUrl: 'asus_zenfone_5.jpg',
-        cost: '1200$',
-        freeDelivery: true
-    },
-    {
-        id: 3,
-        title: "Asus Zenfone 1",
-        imgUrl: 'asus_zenfone_5.jpg',
-        cost: '450$',
-        freeDelivery: false
-    },
-    {
-        id: 4,
-        title: "Samsung Galaxy 3",
-        imgUrl: 'asus_zenfone_5.jpg',
-        cost: '1450$',
-        freeDelivery: true
-    },
-    {
-        id: 5,
-        title: "Asus Zenfone 1",
-        imgUrl: 'asus_zenfone_5.jpg',
-        cost: '450$',
-        freeDelivery: false
-    },
-    {
-        id: 5,
-        title: "Asus Zenfone 1",
-        imgUrl: 'asus_zenfone_5.jpg',
-        cost: '4450$',
-        freeDelivery: true
-    },
-];
-
 
 export const addProduct = (values) => async dispatch => {
     try {
@@ -85,7 +46,7 @@ export const addProductToShoppingCart = idProduct => dispatch => {
     dispatch({type: ADD_PRODUCT_TO_SHOPPING_CARTS, payload});
 };
 
-export const getProducts = () => async dispatch => {
+export const getProducts = () => dispatch => {
     try {
         // const products = axios.get(`${ROOT_URL}/getProduct}`);
         //
@@ -97,4 +58,16 @@ export const getProducts = () => async dispatch => {
     } catch (e) {
         dispatch(failedProduct('Error! Something was wrong during load products!'))
     }
+};
+
+export const filterProductsByCategory = category => dispatch => {
+
+    try {
+
+        dispatch({type: FILTER_PRODUCTS_BY_CATEGORY, payload: category})
+
+    } catch (e) {
+        dispatch(failedProduct('Error! Something was wrong during load products!'))
+    }
+
 };

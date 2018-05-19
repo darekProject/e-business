@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import * as actions from '../../actions';
 
 import './Categories.css'
 
@@ -13,7 +15,7 @@ class Categories extends Component {
     getInitialState = () => {
         return {
             activeCat: [false, false, false],
-            categories: ['smartphone', 'laptops', 'accessories']
+            categories: ['smartphone', 'laptops', 'accessories', 'all']
         }
     };
 
@@ -21,6 +23,8 @@ class Categories extends Component {
         const activeCat = [false, false, false];
         activeCat[i] = true;
         this.setState({activeCat: [...activeCat]});
+
+        this.props.filterProductsByCategory(category);
     };
 
     renderCategory = () => {
@@ -43,4 +47,4 @@ class Categories extends Component {
     }
 }
 
-export default Categories;
+export default connect(null, actions)(Categories);

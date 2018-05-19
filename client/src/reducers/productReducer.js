@@ -1,4 +1,4 @@
-import {ADD_PRODUCT, ADD_PRODUCT_TO_SHOPPING_CARTS, GET_PRODUCT} from "../actions/type";
+import {ADD_PRODUCT, ADD_PRODUCT_TO_SHOPPING_CARTS, FILTER_PRODUCTS_BY_CATEGORY, GET_PRODUCT} from "../actions/type";
 
 export default function (state = {}, action) {
     switch (action.type) {
@@ -16,6 +16,11 @@ export default function (state = {}, action) {
             return {
                 ...state,
                 allProducts: action.payload
+            };
+        case FILTER_PRODUCTS_BY_CATEGORY:
+            return {
+                ...state,
+                sortByCategory: action.payload
             };
         default:
             return state;
