@@ -3,7 +3,7 @@ import React from 'react';
 import "./ProductCard.css"
 
 const ProductCard = (props) => {
-    return <div className="col-lg-4 product-card-wrapper">
+    return <div className="col-lg-4 product-card-wrapper" onClick={() => props.goToDescription(props.idProduct)}>
         <div className="product-card">
             <img src={`/images/${props.imgUrl}`} alt={`${props.imgUrl}`}/>
             <div className="small-description">

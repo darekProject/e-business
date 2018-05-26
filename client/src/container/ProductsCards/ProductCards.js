@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
+import {withRouter} from "react-router-dom";
 
 import ProductCard from "../../components/ProductCard/ProductCard";
 import Preloader from '../../components/Preloader/Preloader';
@@ -13,7 +14,6 @@ class ProductCards extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = this.getInitialState();
     }
 
@@ -29,51 +29,42 @@ class ProductCards extends Component {
         this.props.addProductToShoppingCart(idProduct);
     };
 
+    goToDescription = id => {
+        this.props.history.push(`/product/${id}`);
+    };
+
+    renderProductCard = products => {
+        return products.map(product => {
+            const {
+                id,
+                title,
+                imgUrl,
+                cost,
+                freeDelivery
+            } = product;
+
+            const props = {
+                idProduct: id,
+                title,
+                imgUrl,
+                cost,
+                freeDelivery,
+                handleAddProductToShoppingCarts: this.handleAddProductToShoppingCarts,
+                goToDescription: (id) => this.goToDescription(id)
+            };
+            return <ProductCard {...props} />
+        });
+    };
+
     renderProducts = () => {
         const {allProducts, filteredProducts, noProducts} = this.state;
 
         if (noProducts) {
             return <NoProduct information={'No products. You have to change key words!'}/>
         } else if (allProducts && !filteredProducts) {
-            return allProducts.map(product => {
-                const {
-                    id,
-                    title,
-                    imgUrl,
-                    cost,
-                    freeDelivery
-                } = product;
-
-                const props = {
-                    idProduct: id,
-                    title,
-                    imgUrl,
-                    cost,
-                    freeDelivery,
-                    handleAddProductToShoppingCarts: this.handleAddProductToShoppingCarts
-                };
-                return <ProductCard {...props} />
-            });
+            return this.renderProductCard(allProducts);
         } else if (filteredProducts) {
-            return filteredProducts.map(product => {
-                const {
-                    id,
-                    title,
-                    imgUrl,
-                    cost,
-                    freeDelivery
-                } = product;
-
-                const props = {
-                    idProduct: id,
-                    title,
-                    imgUrl,
-                    cost,
-                    freeDelivery,
-                    handleAddProductToShoppingCarts: this.handleAddProductToShoppingCarts
-                };
-                return <ProductCard {...props} />
-            });
+            return this.renderProductCard(filteredProducts);
         } else {
             return <Preloader/>
         }
@@ -179,4 +170,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, actions)(ProductCards);
+export default withRouter(connect(mapStateToProps, actions)(ProductCards));

@@ -77,8 +77,13 @@ export const getProducts = () => dispatch => {
         // products.map(product => {
         //     product.cost > 1000 ? product.freeDelivery = true : product.freeDelivery = false;
         // });
+        const products = [];
 
-        dispatch({type: GET_PRODUCT, payload: MOCK_PRODUCTS})
+        MOCK_PRODUCTS.map(prod => {
+            products.push(prod);
+        });
+
+        dispatch({type: GET_PRODUCT, payload: products})
     } catch (e) {
         dispatch(failedProduct('Error! Something was wrong during load products!'))
     }
