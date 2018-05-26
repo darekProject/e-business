@@ -1,0 +1,57 @@
+@import "../../styles/_variable"
+
+.shopping-cart-title
+  font-family: $font
+  margin-bottom: 50px
+
+.title-table-column
+  display: flex
+  margin-bottom: 15px
+  span
+    display: block
+    width: 20%
+    text-align: center
+    font-family: $font
+    font-weight: 600
+  span:first-child
+    width: 40%
+    text-align: left
+  span:last-child
+    text-align: right
+    padding-right: 20px
+
+.wrapper-products-cart
+  border-bottom: 3px solid #e2e2e2
+
+.summary
+  margin: 20px 0 80px 0
+  padding: 0 60px
+  & > div
+    display: flex
+    justify-content: space-between
+  div
+    text-align: center
+    a
+      text-decoration: none
+      font-family: $font
+      color: #000000
+      i
+        margin-right: 20px
+        color: #007bff
+        font-size: 20px
+    p
+      font-family: $font
+      span
+        margin-left: 15px
+        font-weight: 600
+    .btn-buy-cart
+      background: #7CBB00
+      color: #ffffff
+      font-family: $font
+      font-size: 18px
+      border: none
+      width: 160px
+      height: 40px
+      border-radius: 20px
+      font-weight: 600
+      cursor: pointer

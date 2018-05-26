@@ -6,7 +6,7 @@ import {
     FILTER_PRODUCTS_BY_CATEGORY,
     FILTER_PRODUCTS_BY_KEYWORDS,
     GET_PRODUCT,
-    GET_PRODUCTS_OF_CART
+    GET_PRODUCTS_OF_CART, REMOVE_PRODUCT_TO_SHOPPING_CARTS
 } from "./type";
 import {MOCK_PRODUCTS} from './Mocks/mock_product';
 
@@ -48,6 +48,28 @@ export const addProductToShoppingCart = idProduct => dispatch => {
     dispatch({type: ADD_PRODUCT_TO_SHOPPING_CARTS, payload});
 };
 
+export const removeProductOfShoppingCart = (idProduct, force = false) => dispatch => {
+    const productInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart'));
+
+    if (productInShoppingCart) {
+        const cartIndex = productInShoppingCart.findIndex(prod => prod === idProduct);
+        if (force) {
+            const amountProductInCart = productInShoppingCart.filter(prod => prod === idProduct);
+            for (let i = 0; i < amountProductInCart.length; i++) {
+                const cartIndex = productInShoppingCart.findIndex(prod => prod === idProduct);
+                productInShoppingCart.splice(cartIndex, 1);
+            }
+        } else {
+            productInShoppingCart.splice(cartIndex, 1);
+        }
+    }
+
+    localStorage.setItem('productInShoppingCart', JSON.stringify(productInShoppingCart));
+
+    const payload = {idProduct, timestamp: Date.now()};
+    dispatch({type: REMOVE_PRODUCT_TO_SHOPPING_CARTS, payload});
+};
+
 export const getProducts = () => dispatch => {
     try {
         // const products = axios.get(`${ROOT_URL}/getProduct}`);
@@ -71,17 +93,17 @@ export const filterProductsByKeyWords = keywords => dispatch => {
 };
 
 export const getProductsOfCart = () => dispatch => {
-  try {
-      const productsInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart'));
-      const products = [];
+    try {
+        const productsInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart'));
+        const products = [];
 
-      productsInShoppingCart.map(prodId => {
-          const mocIndex = MOCK_PRODUCTS.findIndex(el => el.id === prodId);
-          products.push(MOCK_PRODUCTS[mocIndex]);
-      });
+        productsInShoppingCart.map(prodId => {
+            const mocIndex = MOCK_PRODUCTS.findIndex(el => el.id === prodId);
+            products.push(MOCK_PRODUCTS[mocIndex]);
+        });
 
-      dispatch({type: GET_PRODUCTS_OF_CART, payload: products});
-  } catch (e) {
-      console.warn(e);
-  }
+        dispatch({type: GET_PRODUCTS_OF_CART, payload: products});
+    } catch (e) {
+        console.warn(e);
+    }
 };

@@ -1,6 +1,7 @@
 import {
     ADD_PRODUCT,
     ADD_PRODUCT_TO_SHOPPING_CARTS,
+    REMOVE_PRODUCT_TO_SHOPPING_CARTS,
     FILTER_PRODUCTS_BY_CATEGORY,
     FILTER_PRODUCTS_BY_KEYWORDS,
     GET_PRODUCT, GET_PRODUCTS_OF_CART
@@ -14,6 +15,11 @@ export default function (state = {}, action) {
                 product: action.payload
             };
         case ADD_PRODUCT_TO_SHOPPING_CARTS:
+            return {
+                ...state,
+                productAddedToShoppingCarts: action.payload
+            };
+        case REMOVE_PRODUCT_TO_SHOPPING_CARTS:
             return {
                 ...state,
                 productAddedToShoppingCarts: action.payload

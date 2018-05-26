@@ -1,0 +1,43 @@
+@import "../../styles/_variable"
+
+.custom-row
+  display: flex
+  width: 100%
+  border-top: 1px solid #e2e2e2
+  div.custom-td
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 20%
+    min-height: 100px
+    p
+      margin: 0 15px
+      font-family: $font
+    i
+      cursor: pointer
+    i.fa-plus
+      color: #7CBB00
+    i.fa-minus
+      color: #EA4335
+    img
+      cursor: pointer
+  .amount-product
+    p
+      background: #e2e2e2
+      padding: 5px
+      border-radius: 4px
+      width: 30px
+      text-align: center
+  div.custom-td:first-child
+    width: 40%
+    justify-content: flex-start
+    a
+      display: flex
+      align-items: center
+      justify-content: flex-start
+      color: #000000
+      text-decoration: none
+    img
+      height: 70px
+  div.custom-td:last-child
+    justify-content: flex-end
