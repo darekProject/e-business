@@ -2,14 +2,14 @@ import React, {Component, Fragment} from 'react';
 import '../../App.css';
 
 import Header from "../Header/Header";
-import ProductCarts from "../ProductsCarts/ProductCarts";
+import ProductCards from "../ProductsCards/ProductCards";
 
 class HomePage extends Component {
   render() {
     return (
       <Fragment>
           <Header/>
-          <ProductCarts/>
+          <ProductCards/>
       </Fragment>
     );
   }

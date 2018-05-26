@@ -5,7 +5,8 @@ import {
     FAILED_PRODUCT,
     FILTER_PRODUCTS_BY_CATEGORY,
     FILTER_PRODUCTS_BY_KEYWORDS,
-    GET_PRODUCT
+    GET_PRODUCT,
+    GET_PRODUCTS_OF_CART
 } from "./type";
 import {MOCK_PRODUCTS} from './Mocks/mock_product';
 
@@ -67,4 +68,20 @@ export const filterProductsByCategory = category => dispatch => {
 
 export const filterProductsByKeyWords = keywords => dispatch => {
     dispatch({type: FILTER_PRODUCTS_BY_KEYWORDS, payload: keywords});
+};
+
+export const getProductsOfCart = () => dispatch => {
+  try {
+      const productsInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart'));
+      const products = [];
+
+      productsInShoppingCart.map(prodId => {
+          const mocIndex = MOCK_PRODUCTS.findIndex(el => el.id === prodId);
+          products.push(MOCK_PRODUCTS[mocIndex]);
+      });
+
+      dispatch({type: GET_PRODUCTS_OF_CART, payload: products});
+  } catch (e) {
+      console.warn(e);
+  }
 };

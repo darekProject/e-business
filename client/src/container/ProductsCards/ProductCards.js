@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
 
-import ProductCart from "../../components/ProductCart/ProductCart";
+import ProductCard from "../../components/ProductCard/ProductCard";
 import Preloader from '../../components/Preloader/Preloader';
 
-import './ProductsCarts.css';
+import './ProductsCards.css';
 import NoProduct from "../../components/NoProducts/NoProducts";
 
-class ProductCarts extends Component {
+class ProductCards extends Component {
 
     constructor(props) {
         super(props);
@@ -52,7 +52,7 @@ class ProductCarts extends Component {
                     freeDelivery,
                     handleAddProductToShoppingCarts: this.handleAddProductToShoppingCarts
                 };
-                return <ProductCart {...props} />
+                return <ProductCard {...props} />
             });
         } else if (filteredProducts) {
             return filteredProducts.map(product => {
@@ -72,7 +72,7 @@ class ProductCarts extends Component {
                     freeDelivery,
                     handleAddProductToShoppingCarts: this.handleAddProductToShoppingCarts
                 };
-                return <ProductCart {...props} />
+                return <ProductCard {...props} />
             });
         } else {
             return <Preloader/>
@@ -157,13 +157,13 @@ class ProductCarts extends Component {
     }
 }
 
-ProductCarts.propTypes = {
+ProductCards.propTypes = {
     addProductToShoppingCart: PropTypes.func,
     getProducts: PropTypes.func,
     sortByCategory: PropTypes.string
 };
 
-ProductCarts.defaultTypes = {
+ProductCards.defaultTypes = {
     addProductToShoppingCart: () => {
     },
     getProducts: () => {
@@ -179,4 +179,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, actions)(ProductCarts);
+export default connect(mapStateToProps, actions)(ProductCards);

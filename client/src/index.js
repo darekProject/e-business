@@ -10,6 +10,7 @@ import {Route, BrowserRouter} from 'react-router-dom';
 import './index.css';
 import App from './container/HomePage/HomePage';
 import AddProducts from "./container/AddProcucts/AddProducts";
+import ShoppingCartPage from './container/ShoppingCartPage/ShoppingCartPage';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
@@ -19,6 +20,7 @@ ReactDOM.render(
         <BrowserRouter>
             <Fragment>
                 <Route exact path="/" component={App}/>
+                <Route exact path="/shopping-cart" component={ShoppingCartPage}/>
                 <Route path="/admin/addProduct" component={AddProducts}/>
             </Fragment>
         </BrowserRouter>
