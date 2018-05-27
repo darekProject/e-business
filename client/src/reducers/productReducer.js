@@ -4,7 +4,8 @@ import {
     REMOVE_PRODUCT_TO_SHOPPING_CARTS,
     FILTER_PRODUCTS_BY_CATEGORY,
     FILTER_PRODUCTS_BY_KEYWORDS,
-    GET_PRODUCT, GET_PRODUCTS_OF_CART
+    GET_PRODUCTS, GET_PRODUCTS_OF_CART,
+    GET_PRODUCT, ADD_PRODUCTS_TO_SHOPPING_CARTS
 } from "../actions/type";
 
 export default function (state = {}, action) {
@@ -19,15 +20,25 @@ export default function (state = {}, action) {
                 ...state,
                 productAddedToShoppingCarts: action.payload
             };
+        case ADD_PRODUCTS_TO_SHOPPING_CARTS:
+            return {
+                ...state,
+                productAddedToShoppingCarts: action.payload
+            };
         case REMOVE_PRODUCT_TO_SHOPPING_CARTS:
             return {
                 ...state,
                 productAddedToShoppingCarts: action.payload
             };
-        case GET_PRODUCT:
+        case GET_PRODUCTS:
             return {
                 ...state,
                 allProducts: action.payload
+            };
+        case GET_PRODUCT:
+            return {
+                ...state,
+                product: action.payload
             };
         case GET_PRODUCTS_OF_CART: {
             return {

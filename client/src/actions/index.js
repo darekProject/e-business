@@ -5,8 +5,9 @@ import {
     FAILED_PRODUCT,
     FILTER_PRODUCTS_BY_CATEGORY,
     FILTER_PRODUCTS_BY_KEYWORDS,
-    GET_PRODUCT,
-    GET_PRODUCTS_OF_CART, REMOVE_PRODUCT_TO_SHOPPING_CARTS
+    GET_PRODUCTS, GET_PRODUCT,
+    GET_PRODUCTS_OF_CART, REMOVE_PRODUCT_TO_SHOPPING_CARTS,
+    ADD_PRODUCTS_TO_SHOPPING_CARTS
 } from "./type";
 import {MOCK_PRODUCTS} from './Mocks/mock_product';
 
@@ -48,6 +49,19 @@ export const addProductToShoppingCart = idProduct => dispatch => {
     dispatch({type: ADD_PRODUCT_TO_SHOPPING_CARTS, payload});
 };
 
+export const addProductsToShoppingCart = (idProduct, quantity) => dispatch => {
+    const productInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart'));
+
+    for (let i = 0; i < quantity; i++) {
+        productInShoppingCart.push(idProduct);
+    }
+
+    localStorage.setItem('productInShoppingCart', JSON.stringify(productInShoppingCart));
+
+    const payload = {idProduct, timestamp: Date.now()};
+    dispatch({type: ADD_PRODUCTS_TO_SHOPPING_CARTS, payload});
+};
+
 export const removeProductOfShoppingCart = (idProduct, force = false) => dispatch => {
     const productInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart'));
 
@@ -83,9 +97,18 @@ export const getProducts = () => dispatch => {
             products.push(prod);
         });
 
-        dispatch({type: GET_PRODUCT, payload: products})
+        dispatch({type: GET_PRODUCTS, payload: products})
     } catch (e) {
         dispatch(failedProduct('Error! Something was wrong during load products!'))
+    }
+};
+
+export const getProduct = id => dispatch => {
+    try {
+        const product = MOCK_PRODUCTS.find(prod => prod.id === id);
+        dispatch({type: GET_PRODUCT, payload: product});
+    } catch (e) {
+        console.error(e);
     }
 };
 

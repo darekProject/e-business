@@ -1,1 +1,113 @@
 @import "../../styles/_variable"
+
+.product-title
+  font-family: $font
+  font-size: 38px
+  font-weight: 600
+
+.img-box
+  display: flex
+  align-items: center
+
+.prize-box
+  display: flex
+  justify-content: flex-end
+  border-radius: 10px
+  & > div
+    width: 250px
+    border: 1px solid #e2e2e2
+    border-radius: 10px
+    display: flex
+    flex-direction: column
+    align-items: center
+    padding: 30px
+    .section-buy
+      p
+        margin: 0
+        text-align: center
+      p:first-child
+        margin: 20px 0
+      & > div
+        display: flex
+        width: 100%
+        justify-content: center
+        margin-top: 10px
+  .prize
+    width: 100%
+    display: flex
+    justify-content: flex-end
+    p
+      font-family: $font
+      font-size: 14px
+      display: flex
+      align-items: flex-end
+      span
+        display: block
+        width: 150px
+        text-align: right
+        font-size: 26px
+
+.product-description
+  border-top: 1px solid #e2e2e2
+  padding-top: 50px
+  margin: 70px 0
+
+.product-container
+  .horizontal-line
+    background: #e2e2e2
+    height: 1px
+    width: 100%
+    display: block
+  .avaible
+    color: #7CBB00
+    font-family: $font
+    font-weight: 600
+    margin: 20px 0
+  .free-delivery
+    width: 100%
+    text-align: right
+    display: flex
+    align-items: center
+    justify-content: flex-end
+    img
+      margin-right: 10px
+    span
+      font-family: $font
+  .btn-buy-product
+    background: #7CBB00
+    height: 40px
+    width: 200px
+    font-family: $font
+    font-size: 14px
+    border: none
+    color: #ffffff
+    font-weight: 600
+    border-radius: 20px
+    margin-top: 10px
+    cursor: pointer
+    i
+      color: #ffffff
+      margin-right: 15px
+
+.quantity
+  margin: 10px 0
+  div
+    display: flex
+    align-items: center
+    cursor: pointer
+  p.amount
+    width: 30px
+    height: 30px
+    background: #e2e2e2
+    border-radius: 5px
+    margin: 0 15px
+    display: flex
+    align-items: center
+    justify-content: center
+    font-weight: 600
+  i.fa-plus
+    color: #7CBB00
+    margin-right: 15px
+  i.fa-minus
+    color: #EA4335
+    margin-left: 15px

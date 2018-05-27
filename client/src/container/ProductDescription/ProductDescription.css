@@ -1,1 +1,113 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700");
+.product-title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 38px;
+  font-weight: 600; }
+
+.img-box {
+  display: flex;
+  align-items: center; }
+
+.prize-box {
+  display: flex;
+  justify-content: flex-end;
+  border-radius: 10px; }
+  .prize-box > div {
+    width: 250px;
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px; }
+    .prize-box > div .section-buy p {
+      margin: 0;
+      text-align: center; }
+    .prize-box > div .section-buy p:first-child {
+      margin: 20px 0; }
+    .prize-box > div .section-buy > div {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      margin-top: 10px; }
+  .prize-box .prize {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; }
+    .prize-box .prize p {
+      font-family: "Montserrat", sans-serif;
+      font-size: 14px;
+      display: flex;
+      align-items: flex-end; }
+      .prize-box .prize p span {
+        display: block;
+        width: 150px;
+        text-align: right;
+        font-size: 26px; }
+
+.product-description {
+  border-top: 1px solid #e2e2e2;
+  padding-top: 50px;
+  margin: 70px 0; }
+
+.product-container .horizontal-line {
+  background: #e2e2e2;
+  height: 1px;
+  width: 100%;
+  display: block; }
+
+.product-container .avaible {
+  color: #7CBB00;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  margin: 20px 0; }
+
+.product-container .free-delivery {
+  width: 100%;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; }
+  .product-container .free-delivery img {
+    margin-right: 10px; }
+  .product-container .free-delivery span {
+    font-family: "Montserrat", sans-serif; }
+
+.product-container .btn-buy-product {
+  background: #7CBB00;
+  height: 40px;
+  width: 200px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  border: none;
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 20px;
+  margin-top: 10px;
+  cursor: pointer; }
+  .product-container .btn-buy-product i {
+    color: #ffffff;
+    margin-right: 15px; }
+
+.quantity {
+  margin: 10px 0; }
+  .quantity div {
+    display: flex;
+    align-items: center;
+    cursor: pointer; }
+  .quantity p.amount {
+    width: 30px;
+    height: 30px;
+    background: #e2e2e2;
+    border-radius: 5px;
+    margin: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600; }
+  .quantity i.fa-plus {
+    color: #7CBB00;
+    margin-right: 15px; }
+  .quantity i.fa-minus {
+    color: #EA4335;
+    margin-left: 15px; }
