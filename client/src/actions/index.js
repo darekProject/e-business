@@ -10,6 +10,7 @@ import {
     ADD_PRODUCTS_TO_SHOPPING_CARTS, GET_COMMENTS
 } from "./type";
 import {MOCK_PRODUCTS} from './Mocks/mock_product';
+import {MOCK_COMMENTS} from './Mocks/mock_comments';
 
 const ROOT_URL = 'http://localhost:9090';
 
@@ -144,12 +145,18 @@ export const getProductsOfCart = () => async dispatch => {
 };
 
 export const getComments = id => dispatch => {
-  try {
-      const commenst = [];
-      dispatch({type: GET_COMMENTS, payload: commenst})
-  } catch (e) {
-      console.error(e)
-  }
+    try {
+        const comments = [];
+        MOCK_COMMENTS.map(com => {
+            if (com.prodId === id) {
+                comments.push(com)
+            }
+        });
+
+        dispatch({type: GET_COMMENTS, payload: comments})
+    } catch (e) {
+        console.error(e)
+    }
 };
 
 export const addComments = values => dispatch => {

@@ -1,1 +1,30 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700");
+.comments-box {
+  padding: 50px 0 100px;
+  border-top: 1px solid #e2e2e2; }
+  .comments-box .product-opinins {
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px; }
+  .comments-box .comments {
+    margin-top: 30px; }
+  .comments-box .add-comments {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 100px;
+    margin-top: 50px; }
+    .comments-box .add-comments .add-comments-btn {
+      border-radius: 100%;
+      background: #007bff;
+      height: 60px;
+      width: 60px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all .7s; }
+      .comments-box .add-comments .add-comments-btn:hover {
+        border-radius: 10px; }
+      .comments-box .add-comments .add-comments-btn i {
+        color: #ffffff;
+        font-size: 20px; }
