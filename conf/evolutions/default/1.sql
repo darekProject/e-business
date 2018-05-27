@@ -22,8 +22,9 @@ create table "product" (
   "name" varchar not null,
   "description" varchar not null,
   "keyWords" varchar not null,
-  category int not null,
-  foreign key(category) references category(id)
+  "prize"  varchar not null,
+  "imgUrl" varchar not null,
+  "category" varchar not null
 );
 
 create table "user" (

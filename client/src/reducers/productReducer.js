@@ -13,7 +13,7 @@ export default function (state = {}, action) {
         case ADD_PRODUCT:
             return {
                 ...state,
-                product: action.payload
+                status: action.payload
             };
         case ADD_PRODUCT_TO_SHOPPING_CARTS:
             return {

@@ -14,9 +14,11 @@
   justify-content: center;
   flex-direction: column; }
   .product-card img {
-    max-height: 250px; }
+    max-height: 250px;
+    height: 250px; }
   .product-card .small-description {
-    font-family: "Montserrat", sans-serif; }
+    font-family: "Montserrat", sans-serif;
+    width: 200px; }
     .product-card .small-description h3 {
       color: #000000; }
       .product-card .small-description h3:hover {
@@ -51,6 +53,7 @@
         font-size: 21px;
         font-weight: 600; }
       .product-card footer .cost .free-delivery img {
-        margin-right: 5px; }
+        margin-right: 5px;
+        height: 20px; }
       .product-card footer .cost .free-delivery span {
         font-size: 10px; }

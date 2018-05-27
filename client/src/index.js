@@ -12,9 +12,14 @@ import App from './container/HomePage/HomePage';
 import AddProducts from "./container/AddProcucts/AddProducts";
 import ShoppingCartPage from './container/ShoppingCartPage/ShoppingCartPage';
 import ProductDescription from "./container/ProductDescription/ProductDescription";
+import axios from 'axios';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
+
+window.axios = require('axios');
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 
 ReactDOM.render(
     <Provider store={store}>

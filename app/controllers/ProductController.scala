@@ -29,14 +29,10 @@ class ProductController @Inject()(productsRepo: ProductRepository, categoryRepo:
 
     productFromJson match {
       case JsSuccess(p: Product, path: JsPath) =>
-        productsRepo.create(p.name, p.description, p.keyWords, p.category).map {
+        productsRepo.create(p.name, p.description, p.keyWords, p.category, p.imgUrl, p.prize).map {
           _ =>
             Ok(Json.obj(
-              "status" -> "OK",
-              "name" -> p.name,
-              "description" -> p.description,
-              "keyWords" -> p.keyWords,
-              "category" -> p.category
+              "status" -> "OK"
             ))
         }
       case e: JsError => Future.successful(Ok("Errors: " + JsError.toJson(e).toString()))
@@ -49,6 +45,19 @@ class ProductController @Inject()(productsRepo: ProductRepository, categoryRepo:
       Ok(toJson(products))
     }
   }
+
+    def getProduct(id: Int) = Action.async { implicit request =>
+      var productsById = new ArrayBuffer[Product]()
+
+      productsRepo.list().map { products =>
+        products.foreach(product => {
+          if (product.id == id) {
+            productsById += product
+          }
+        })
+        Ok(Json.toJson(productsById))
+      }
+    }
 
   def getProductsByKeyWords: Action[JsValue] = Action.async(parse.json) { implicit request =>
 

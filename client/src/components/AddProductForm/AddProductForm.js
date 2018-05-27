@@ -46,7 +46,7 @@ class AddProductForm extends Component {
                                 <label>Key words:</label>
                                 <div>
                                     <Field type="text"
-                                           name="keywords"
+                                           name="keyWords"
                                            component={renderField}
                                            placeholder="phone, asus..."/>
                                 </div>
@@ -82,7 +82,7 @@ class AddProductForm extends Component {
                                 <label>Prize:</label>
                                 <div>
                                     <Field type="text"
-                                           name="imgUrl"
+                                           name="prize"
                                            component={renderField}
                                            placeholder="300$"/>
                                 </div>

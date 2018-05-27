@@ -12,8 +12,8 @@ class AddProducts extends Component {
     };
 
     renderMessage = () => {
-        if (this.props.product) {
-            return <div>{this.props.product.product}</div>
+        if (this.props.status && this.props.status.data.status === 'OK') {
+            return <div className="added-product">PRODUCT ADDED!!!</div>
         }
     };
 
@@ -27,7 +27,7 @@ class AddProducts extends Component {
 
 const mapStateToProps = state => {
     return {
-        product: state.product
+        status: state.product.status
     }
 };
 

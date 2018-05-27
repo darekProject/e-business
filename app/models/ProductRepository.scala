@@ -41,9 +41,12 @@ class ProductRepository @Inject()(dbConfigProvider: DatabaseConfigProvider, cate
 
     def keyWords = column[String]("keyWords")
 
-    def category = column[Int]("category")
+    def category = column[String]("category")
 
-    def category_fk = foreignKey("cat_fk", category, cat)(_.id)
+    def imgUrl = column[String]("imgUrl")
+
+    def prize = column[String]("prize")
+
 
     /**
       * This is the tables default "projection".
@@ -53,9 +56,7 @@ class ProductRepository @Inject()(dbConfigProvider: DatabaseConfigProvider, cate
       * In this case, we are simply passing the id, name and page parameters to the Person case classes
       * apply and unapply methods.
       */
-    def * = (id, name, description, keyWords, category) <> ((Product.apply _).tupled, Product.unapply)
-
-    //def * = (id, name) <> ((Category.apply _).tupled, Category.unapply)
+    def * = (id, name, description, keyWords, category, imgUrl, prize) <> ((Product.apply _).tupled, Product.unapply)
   }
 
   /**
@@ -75,16 +76,16 @@ class ProductRepository @Inject()(dbConfigProvider: DatabaseConfigProvider, cate
     * This is an asynchronous operation, it will return a future of the created person, which can be used to obtain the
     * id for that person.
     */
-  def create(name: String, description: String, keyWords: String, category: Int): Future[Product] = db.run {
+  def create(name: String, description: String, keyWords: String, category: String, imgUrl: String, prize: String): Future[Product] = db.run {
     // We create a projection of just the name and age columns, since we're not inserting a value for the id column
-    (product.map(p => (p.name, p.description, p.keyWords, p.category))
+    (product.map(p => (p.name, p.description, p.keyWords, p.category, p.imgUrl, p.prize))
       // Now define it to return the id, because we want to know what id was generated for the person
       returning product.map(_.id)
       // And we define a transformation for the returned value, which combines our original parameters with the
       // returned id
-      into { case ((`name`, `description`, `keyWords`, `category`), id) => Product(id, name, description, keyWords, category) }
+      into { case ((`name`, `description`, `keyWords`, `category`, `imgUrl`, `prize`), id) => Product(id, name, description, keyWords, category, imgUrl, prize) }
       // And finally, insert the person into the database
-      ) += (name, description, keyWords, category)
+      ) += (name, description, keyWords, category, imgUrl, prize)
   }
 
   /**

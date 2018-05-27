@@ -11,16 +11,16 @@ import {
 } from "./type";
 import {MOCK_PRODUCTS} from './Mocks/mock_product';
 
-const ROOT_URL = 'http://localhost:5050';
+const ROOT_URL = 'http://localhost:9090';
 
 export const addProduct = (values) => async dispatch => {
     try {
         values.id = 1;
-        const response = axios.post(`${ROOT_URL}/addProduct`, values);
+        const response = await axios.post(`/addproduct`, values);
 
         dispatch({type: ADD_PRODUCT, payload: response})
-
     } catch (e) {
+        console.error(e);
         dispatch(failedProduct('Error! Something was wrong!'))
     }
 };
@@ -84,17 +84,15 @@ export const removeProductOfShoppingCart = (idProduct, force = false) => dispatc
     dispatch({type: REMOVE_PRODUCT_TO_SHOPPING_CARTS, payload});
 };
 
-export const getProducts = () => dispatch => {
+export const getProducts = () => async dispatch => {
     try {
-        // const products = axios.get(`${ROOT_URL}/getProduct}`);
-        //
-        // products.map(product => {
-        //     product.cost > 1000 ? product.freeDelivery = true : product.freeDelivery = false;
-        // });
-        const products = [];
+        const {data: products} = await axios.get(`/products`);
 
-        MOCK_PRODUCTS.map(prod => {
-            products.push(prod);
+        products.map(product => {
+            let {prize} = product;
+            product.cost = prize;
+            prize = parseInt(prize.substring(0, prize.length - 1));
+            prize > 1000 ? product.freeDelivery = true : product.freeDelivery = false;
         });
 
         dispatch({type: GET_PRODUCTS, payload: products})
@@ -103,10 +101,12 @@ export const getProducts = () => dispatch => {
     }
 };
 
-export const getProduct = id => dispatch => {
+export const getProduct = id => async dispatch => {
     try {
-        const product = MOCK_PRODUCTS.find(prod => prod.id === id);
-        dispatch({type: GET_PRODUCT, payload: product});
+        const {data: product} = await axios.get(`/product/${id}`);
+        const rightProduct = product[0];
+        rightProduct.cost = product[0].prize;
+        dispatch({type: GET_PRODUCT, payload: rightProduct});
     } catch (e) {
         console.error(e);
     }
@@ -120,15 +120,20 @@ export const filterProductsByKeyWords = keywords => dispatch => {
     dispatch({type: FILTER_PRODUCTS_BY_KEYWORDS, payload: keywords});
 };
 
-export const getProductsOfCart = () => dispatch => {
+export const getProductsOfCart = () => async dispatch => {
     try {
         const productsInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart'));
         const products = [];
 
-        productsInShoppingCart.map(prodId => {
-            const mocIndex = MOCK_PRODUCTS.findIndex(el => el.id === prodId);
-            products.push(MOCK_PRODUCTS[mocIndex]);
-        });
+        if (productsInShoppingCart) {
+            for (let prodId of productsInShoppingCart) {
+                const {data: product} = await axios.get(`/product/${prodId}`);
+                const rightProduct = product[0];
+                rightProduct.cost = product[0].prize;
+
+                products.push(rightProduct);
+            }
+        }
 
         dispatch({type: GET_PRODUCTS_OF_CART, payload: products});
     } catch (e) {

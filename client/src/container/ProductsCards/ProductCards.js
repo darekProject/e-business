@@ -98,7 +98,7 @@ class ProductCards extends Component {
         const rightProducts = [];
 
         allProducts.map(product => {
-            const productHasKey = product.keywords.split(',');
+            const productHasKey = product.keyWords.split(',');
             const hasGoodKey = productHasKey.find(key => key.toLocaleLowerCase().trim() === keyWords.toLocaleLowerCase().trim());
             if (hasGoodKey) {
                 rightProducts.push(product)
