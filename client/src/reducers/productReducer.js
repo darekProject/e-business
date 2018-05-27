@@ -5,7 +5,7 @@ import {
     FILTER_PRODUCTS_BY_CATEGORY,
     FILTER_PRODUCTS_BY_KEYWORDS,
     GET_PRODUCTS, GET_PRODUCTS_OF_CART,
-    GET_PRODUCT, ADD_PRODUCTS_TO_SHOPPING_CARTS
+    GET_PRODUCT, ADD_PRODUCTS_TO_SHOPPING_CARTS, GET_COMMENTS
 } from "../actions/type";
 
 export default function (state = {}, action) {
@@ -63,6 +63,12 @@ export default function (state = {}, action) {
                 ...newState,
                 sortByKeyWords: action.payload
             };
+        }
+        case GET_COMMENTS: {
+            return {
+                ...state,
+                comments: action.payload
+            }
         }
         default:
             return state;

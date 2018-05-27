@@ -14,3 +14,5 @@ export const REMOVE_PRODUCT_TO_SHOPPING_CARTS = 'remove_product_to_shopping_cart
 export const FILTER_PRODUCTS_BY_CATEGORY = 'filter_products_by_category';
 export const FILTER_PRODUCTS_BY_KEYWORDS = 'filter_products_by_keywords';
 export const GET_PRODUCTS_OF_CART = 'get_products_of_cart';
+
+export const GET_COMMENTS = 'get_comments';

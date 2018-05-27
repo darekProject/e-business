@@ -7,7 +7,7 @@ import {
     FILTER_PRODUCTS_BY_KEYWORDS,
     GET_PRODUCTS, GET_PRODUCT,
     GET_PRODUCTS_OF_CART, REMOVE_PRODUCT_TO_SHOPPING_CARTS,
-    ADD_PRODUCTS_TO_SHOPPING_CARTS
+    ADD_PRODUCTS_TO_SHOPPING_CARTS, GET_COMMENTS
 } from "./type";
 import {MOCK_PRODUCTS} from './Mocks/mock_product';
 
@@ -138,5 +138,23 @@ export const getProductsOfCart = () => async dispatch => {
         dispatch({type: GET_PRODUCTS_OF_CART, payload: products});
     } catch (e) {
         console.warn(e);
+    }
+};
+
+export const getComments = id => dispatch => {
+  try {
+      const commenst = [];
+      dispatch({type: GET_COMMENTS, payload: commenst})
+  } catch (e) {
+      console.error(e)
+  }
+};
+
+export const addComments = values => dispatch => {
+    try {
+        const comments = [];
+        // dispatch({type: GET_COMMENTS, payload: commenst})
+    } catch (e) {
+        console.error(e)
     }
 };

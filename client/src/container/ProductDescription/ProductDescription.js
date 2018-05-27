@@ -5,6 +5,7 @@ import * as actions from '../../actions';
 
 import Header from '../Header/Header';
 import Preloader from "../../components/Preloader/Preloader";
+import Comments from "../Comments/Comments";
 
 import './ProductDescription.css';
 
@@ -107,6 +108,7 @@ class ProductDescription extends Component {
         return <div>
             <Header/>
             {this.renderDescription()}
+            <Comments idProduct={this.state.idProduct} />
         </div>
     }
 }
