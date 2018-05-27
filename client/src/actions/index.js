@@ -89,8 +89,9 @@ export const getProducts = () => async dispatch => {
         const {data: products} = await axios.get(`/products`);
 
         products.map(product => {
-            let {prize} = product;
+            let {prize, name} = product;
             product.cost = prize;
+            product.title = name;
             prize = parseInt(prize.substring(0, prize.length - 1));
             prize > 1000 ? product.freeDelivery = true : product.freeDelivery = false;
         });
@@ -129,6 +130,7 @@ export const getProductsOfCart = () => async dispatch => {
             for (let prodId of productsInShoppingCart) {
                 const {data: product} = await axios.get(`/product/${prodId}`);
                 const rightProduct = product[0];
+                rightProduct.title = product[0].name;
                 rightProduct.cost = product[0].prize;
 
                 products.push(rightProduct);

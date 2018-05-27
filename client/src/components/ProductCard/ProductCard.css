@@ -18,7 +18,8 @@
     height: 250px; }
   .product-card .small-description {
     font-family: "Montserrat", sans-serif;
-    width: 200px; }
+    min-width: 200px;
+    max-width: 300px; }
     .product-card .small-description h3 {
       color: #000000; }
       .product-card .small-description h3:hover {
