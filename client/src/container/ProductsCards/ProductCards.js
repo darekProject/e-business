@@ -21,7 +21,7 @@ class ProductCards extends Component {
         return {
             allProducts: null,
             filteredProducts: null,
-            noProducts: null
+            noProducts: false
         }
     };
 
@@ -81,7 +81,8 @@ class ProductCards extends Component {
 
         if (rightProducts.length > 0) {
             this.setState({
-                filteredProducts: rightProducts
+                filteredProducts: rightProducts,
+                noProducts: false
             });
         } else {
             this.setState({
@@ -106,7 +107,8 @@ class ProductCards extends Component {
 
         if (rightProducts.length > 0) {
             this.setState({
-                filteredProducts: rightProducts
+                filteredProducts: rightProducts,
+                noProducts: false
             });
         } else {
             this.setState({
@@ -125,18 +127,18 @@ class ProductCards extends Component {
 
         if (allProducts) {
             this.setState({
-                allProducts
+                allProducts,
+                noProducts: false
+            }, () => {
+                if (sortByCategory) {
+                    this.filterDataByCategory(sortByCategory);
+                }
+
+                if (sortByKeyWords) {
+                    this.filterProductsByKeyWords(sortByKeyWords);
+                }
             })
         }
-
-        if (sortByCategory) {
-            this.filterDataByCategory(sortByCategory);
-        }
-
-        if (sortByKeyWords) {
-            this.filterProductsByKeyWords(sortByKeyWords);
-        }
-
     }
 
     render() {

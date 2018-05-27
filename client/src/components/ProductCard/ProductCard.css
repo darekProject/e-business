@@ -19,6 +19,8 @@
     font-family: "Montserrat", sans-serif; }
     .product-card .small-description h3 {
       color: #000000; }
+      .product-card .small-description h3:hover {
+        text-decoration: underline; }
   .product-card .stars {
     margin: 10px 0 30px; }
     .product-card .stars i {

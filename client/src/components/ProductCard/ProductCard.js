@@ -3,11 +3,11 @@ import React from 'react';
 import "./ProductCard.css"
 
 const ProductCard = (props) => {
-    return <div className="col-lg-4 product-card-wrapper" onClick={() => props.goToDescription(props.idProduct)}>
+    return <div className="col-lg-4 product-card-wrapper">
         <div className="product-card">
-            <img src={`/images/${props.imgUrl}`} alt={`${props.imgUrl}`}/>
+            <img src={`/images/${props.imgUrl}`} alt={`${props.imgUrl}`} onClick={() => props.goToDescription(props.idProduct)}/>
             <div className="small-description">
-                <h3 className='title-product'>{props.title}</h3>
+                <h3 className='title-product' onClick={() => props.goToDescription(props.idProduct)}>{props.title}</h3>
                 <div className="stars">
                     <i className="fas fa-star"></i>
                     <i className="fas fa-star"></i>

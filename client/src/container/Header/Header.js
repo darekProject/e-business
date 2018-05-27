@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
+import {withRouter} from 'react-router-dom';
 
 import Categories from "../../components/Categories/Categories";
 import Search from "../../components/Search/Search";
@@ -29,6 +30,7 @@ class Header extends Component {
 
     handleSubmitSearch = ({keywords}) => {
         this.props.filterProductsByKeyWords(keywords);
+        this.props.history.push('/');
     };
 
     componentWillReceiveProps(nextProps) {
@@ -70,4 +72,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, actions)(Header);
+export default withRouter(connect(mapStateToProps, actions)(Header));

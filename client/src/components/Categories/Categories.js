@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
+import {withRouter} from 'react-router-dom';
 
 import './Categories.css'
 
@@ -25,6 +26,7 @@ class Categories extends Component {
         this.setState({activeCat: [...activeCat]});
 
         this.props.filterProductsByCategory(category);
+        this.props.history.push('/');
     };
 
     renderCategory = () => {
@@ -47,4 +49,4 @@ class Categories extends Component {
     }
 }
 
-export default connect(null, actions)(Categories);
+export default withRouter(connect(null, actions)(Categories));
