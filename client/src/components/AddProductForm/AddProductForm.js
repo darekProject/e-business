@@ -34,7 +34,7 @@ class AddProductForm extends Component {
                         <form id="addProduct"
                               onSubmit={handleSubmit((values) => this.props.handleSubmitProductForm(values))}>
                             <div className="form-box">
-                                <label>Name:</label>
+                                <label>Title:</label>
                                 <div>
                                     <Field type="text"
                                            name="name"
@@ -76,6 +76,15 @@ class AddProductForm extends Component {
                                            name="description"
                                            component={renderFieldText}
                                            placeholder="description..."/>
+                                </div>
+                            </div>
+                            <div className="form-box">
+                                <label>Prize:</label>
+                                <div>
+                                    <Field type="text"
+                                           name="imgUrl"
+                                           component={renderField}
+                                           placeholder="300$"/>
                                 </div>
                             </div>
                             <button type="submit" className="btn btn-primary">Add product</button>
