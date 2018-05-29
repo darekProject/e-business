@@ -103,6 +103,8 @@ class ProductCards extends Component {
             if (hasGoodKey) {
                 rightProducts.push(product)
             }
+
+            return product;
         });
 
         if (rightProducts.length > 0) {

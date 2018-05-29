@@ -48,7 +48,7 @@ class Header extends Component {
                 <div className="row">
                     <div className="col-lg-12">
                         <div id="title">
-                            <img src="/images/title-img.png" alt=""/>
+                            <Link to="/"><img src="/images/title-img.png" alt=""/></Link>
                             <h1>SMART-SHOP</h1>
                         </div>
                         <div id="user">

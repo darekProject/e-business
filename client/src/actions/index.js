@@ -92,8 +92,10 @@ export const getProducts = () => async dispatch => {
             let {prize, name} = product;
             product.cost = prize;
             product.title = name;
-            prize = parseInt(prize.substring(0, prize.length - 1));
+            prize = parseInt(prize.substring(0, prize.length - 1), 10);
             prize > 1000 ? product.freeDelivery = true : product.freeDelivery = false;
+
+            return product;
         });
 
         dispatch({type: GET_PRODUCTS, payload: products})

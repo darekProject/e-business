@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import * as actions from '../../actions';
 import {connect} from 'react-redux';
@@ -40,6 +40,8 @@ class Cart extends Component {
                     prod.amount = 1;
                     rightProduct.push(prod);
                 }
+
+                return prod;
             });
 
             rightProduct.map(prod => {
@@ -47,6 +49,8 @@ class Cart extends Component {
                 const allCost = parseInt(cost.substring(0, cost.length - 1), 10) * amount;
                 summaryCost += allCost;
                 prod.allCost = `${allCost}$`;
+
+                return prod;
             });
 
             this.setState({products: rightProduct, summaryCost: summaryCost + '$'});

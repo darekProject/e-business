@@ -14,7 +14,7 @@ class ProductDescription extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            idProduct: parseInt(props.match.params.id),
+            idProduct: parseInt(props.match.params.id, 10),
             quantity: 1
         }
     }
