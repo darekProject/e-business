@@ -17,7 +17,7 @@ create table "orders" (
   foreign key(user) references user(id)
 );
 
-create table "product" (
+create table "product" if not exists (
   "id" integer not null primary key autoincrement,
   "name" varchar not null,
   "description" varchar not null,
@@ -25,6 +25,14 @@ create table "product" (
   "prize"  varchar not null,
   "imgUrl" varchar not null,
   "category" varchar not null
+);
+
+create table "comments" (
+  "id" integer not null primary key autoincrement,
+  "userName" varchar not null,
+  "content" varchar not null,
+  "prodId" integer not null,
+  "timestamp"  varchar not null
 );
 
 create table "user" (

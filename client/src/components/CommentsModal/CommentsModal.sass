@@ -1,1 +1,49 @@
 @import "../../styles/_variable"
+
+.modal-title
+  font-family: $font
+
+.modal-body
+  form#add-comment
+    font-family: $font
+    display: flex
+    align-items: center
+    flex-direction: column
+    .group-wrapper + .group-wrapper
+      margin-top: 20px
+    .group-wrapper
+      display: flex
+      label
+        font-family: $font
+        margin-right: 15px
+        width: 100px
+      & > div
+        display: flex
+        align-items: center
+        justify-content: center
+        flex-direction: column
+        .error-comment
+          color: #EA4335
+          font-family: $font
+          font-size: 12px
+        input, textarea
+          width: 300px
+          height: 40px
+          font-family: $font
+          border: 1px solid #e2e2e2
+          border-radius: 5px
+          padding-left: 10px
+          font-size: 12px
+        textarea
+          height: 150px
+    button
+      width: 200px
+      margin-top: 30px
+      font-weight: 600
+
+.modal-footer
+  button
+    font-family: $font
+    font-weight: 600
+
+

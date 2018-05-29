@@ -39,6 +39,26 @@ class Comments extends Component {
 
     handleSubmitAddComments = (values) => {
         console.log(values);
+        this.addComment(values);
+        this.switchModal();
+        this.props.addCommentToProduct(values, this.state.idProduct);
+    };
+
+    addComment = ({userName, comment}) => {
+        const {comments, idProduct} = this.state;
+
+        const amountComments = comments.length + 1;
+
+        const newComment = {
+            id: amountComments,
+            userName,
+            content: comment,
+            prodId: idProduct,
+            timestamp: `${new Date().toLocaleDateString()} | ${new Date().toLocaleTimeString()}`
+        };
+
+        comments.push(newComment);
+        this.setState({comments});
     };
 
     renderComments = () => {
@@ -68,15 +88,12 @@ class Comments extends Component {
     };
 
     renderButtonAddComment = () => {
-        const {comments} = this.state;
-
-        if (comments && comments.length > 0) {
-            return (
-                <div className="col-lg-12 add-comments">
-                    <button className="add-comments-btn" onClick={() => this.switchModal()}><i className="fas fa-pencil-alt"></i></button>
-                </div>
-            )
-        }
+        return (
+            <div className="col-lg-12 add-comments">
+                <button className="add-comments-btn" onClick={() => this.switchModal()}>
+                    <i className="fas fa-pencil-alt"></i></button>
+            </div>
+        )
     };
 
     modalBackdropClicked = () => {

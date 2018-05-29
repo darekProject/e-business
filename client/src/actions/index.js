@@ -144,14 +144,9 @@ export const getProductsOfCart = () => async dispatch => {
     }
 };
 
-export const getComments = id => dispatch => {
+export const getComments = id => async dispatch => {
     try {
-        const comments = [];
-        MOCK_COMMENTS.map(com => {
-            if (com.prodId === id) {
-                comments.push(com)
-            }
-        });
+        const {data: comments} = await axios.get(`/comments/${id}`);
 
         dispatch({type: GET_COMMENTS, payload: comments})
     } catch (e) {
@@ -159,10 +154,17 @@ export const getComments = id => dispatch => {
     }
 };
 
-export const addComments = values => dispatch => {
+export const addCommentToProduct = ({userName, comment}, id) => async dispatch => {
     try {
-        const comments = [];
-        // dispatch({type: GET_COMMENTS, payload: commenst})
+        const comment = {
+            id,
+            content: comment,
+            userName,
+            prodId: id
+        };
+
+        const response = await axios.post(`/addcomment`, comment);
+        console.log(response);
     } catch (e) {
         console.error(e)
     }

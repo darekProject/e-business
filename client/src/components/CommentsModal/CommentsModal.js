@@ -11,16 +11,16 @@ class CommentsModal extends Component {
     renderField = ({input, label, type, meta: {touched, error, warning}}) => (
         <Fragment>
             <input {...input} placeholder={label} type={type}/>
-            {touched && ((error && <span className="error-info">{error}</span>) || (warning &&
-                <span className="error-info">{warning}</span>))}
+            {touched && ((error && <span className="error-comment">{error}</span>) || (warning &&
+                <span className="error-comment">{warning}</span>))}
         </Fragment>
     );
 
     renderFieldText = ({input, label, type, meta: {touched, error, warning}}) => (
         <Fragment>
             <textarea {...input} placeholder={label} type={type}></textarea>
-            {touched && ((error && <span className="error-data">{error}</span>) || (warning &&
-                <span className="error-data">{warning}</span>))}
+            {touched && ((error && <span className="error-comment">{error}</span>) || (warning &&
+                <span className="error-comment">{warning}</span>))}
         </Fragment>
     );
 
@@ -30,7 +30,7 @@ class CommentsModal extends Component {
         return (
             <Modal visible={this.props.modalVisible} onClickBackdrop={() => this.props.modalBackdropClicked()}>
                 <div className="modal-header">
-                    <h5 className="modal-title">Add comments!</h5>
+                    <h5 className="modal-title">Add comments:</h5>
                 </div>
                 <div className="modal-body">
                     <div className="form">
