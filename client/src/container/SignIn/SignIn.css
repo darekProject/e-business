@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700");
+.error-auth {
+  position: absolute;
+  bottom: 50px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  background: #EA4335;
+  padding: 3px 10px;
+  border-radius: 3px;
+  font-weight: 600; }
+
+.input-box {
+  display: flex;
+  flex-direction: column; }
+  .input-box .error-input {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    margin: 5px 0 0 5px;
+    color: #EA4335; }
+
+.input-box + .input-box {
+  margin-top: 20px; }
+
+.box-sign {
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh - 83px); }
+  .box-sign .sign-wrapper {
+    height: 550px;
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #ffffff;
+    border-radius: 5px;
+    border: 1px solid #e2e2e2;
+    box-shadow: 0 0 10px #e2e2e2; }
+    .box-sign .sign-wrapper > div > div {
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .box-sign .sign-wrapper > div > div a {
+        text-decoration: none;
+        font-family: "Montserrat", sans-serif;
+        font-size: 14px;
+        color: #1149A4;
+        font-weight: 600; }
+      .box-sign .sign-wrapper > div > div p {
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+        font-size: 14px; }
+      .box-sign .sign-wrapper > div > div span {
+        margin: 15px 15px; }
+    .box-sign .sign-wrapper .main-title {
+      color: #007bff;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      font-size: 26px;
+      text-align: center;
+      margin-bottom: 30px; }
+    .box-sign .sign-wrapper .sign-style {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 100%; }
+      .box-sign .sign-wrapper .sign-style input {
+        font-family: "Montserrat", sans-serif;
+        width: 300px;
+        height: 40px;
+        padding: 5px 15px;
+        font-size: 12px;
+        border-radius: 5px;
+        border: 1px solid #eeeeee; }
+      .box-sign .sign-wrapper .sign-style button {
+        width: 150px;
+        height: 40px;
+        border: none;
+        background: #007bff;
+        color: #ffffff;
+        font-family: "Montserrat", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all .5s ease;
+        margin-top: 35px;
+        border-radius: 5px; }

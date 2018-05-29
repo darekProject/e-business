@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 
 import Categories from "../../components/Categories/Categories";
 import Search from "../../components/Search/Search";
@@ -52,15 +52,17 @@ class Header extends Component {
                             <h1>SMART-SHOP</h1>
                         </div>
                         <div id="user">
-                            <button>
-                                <i className="far fa-user"></i>
-                            </button>
+                            <Link to="/signIn">
+                                <button>
+                                    <i className="far fa-user"></i>
+                                </button>
+                            </Link>
                             <ShoppingCart amountProducts={this.state.amountAddedProductToCart}/>
                         </div>
                     </div>
                 </div>
             </div>
-            <Search handleSubmitSearch={(values) => this.handleSubmitSearch(values)}/>
+            < Search handleSubmitSearch={(values) => this.handleSubmitSearch(values)} />
             <Categories/>
         </Fragment>
     }

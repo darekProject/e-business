@@ -1,0 +1,92 @@
+@import "../../styles/variable"
+
+.error-auth
+  position: absolute
+  bottom: 50px
+  font-family: $font
+  font-size: 14px
+  color: #ffffff
+  background: #EA4335
+  padding: 3px 10px
+  border-radius: 3px
+  font-weight: 600
+
+.input-box
+  display: flex
+  flex-direction: column
+  .error-input
+    font-family: $font
+    font-size: 12px
+    margin: 5px 0 0 5px
+    color: #EA4335
+
+.input-box + .input-box
+  margin-top: 20px
+
+.box-sign
+  display: flex
+  justify-content: center
+  min-height: calc(100vh - 83px)
+  .sign-wrapper
+    height: 550px
+    width: 350px
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-direction: column
+    background: #ffffff
+    border-radius: 5px
+    border: 1px solid #e2e2e2
+    box-shadow: 0 0 10px #e2e2e2
+    & > div > div
+      display: flex
+      align-items: center
+      justify-content: center
+      a
+        text-decoration: none
+        font-family: $font
+        font-size: 14px
+        color: $darkBlue
+        font-weight: 600
+      p
+        margin: 0
+        font-family: $font
+        font-size: 14px
+      span
+        margin: 15px 15px
+    .main-title
+      color: $blue
+      font-family: $font
+      font-weight: 600
+      font-size: 26px
+      text-align: center
+      margin-bottom: 30px
+    .sign-style
+      display: flex
+      align-items: center
+      justify-content: center
+      flex-direction: column
+      width: 100%
+      input
+        font-family: $font
+        width: 300px
+        height: 40px
+        padding: 5px 15px
+        font-size: 12px
+        border-radius: 5px
+        border: 1px solid #eeeeee
+      button
+        width: 150px
+        height: 40px
+        border: none
+        background: $blue
+        color: #ffffff
+        font-family: $font
+        font-size: 18px
+        font-weight: 700
+        cursor: pointer
+        transition: all .5s ease
+        margin-top: 35px
+        border-radius: 5px
+
+

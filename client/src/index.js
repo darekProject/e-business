@@ -6,13 +6,15 @@ import reduxThunk from 'redux-thunk';
 import registerServiceWorker from './registerServiceWorker';
 import reducers from './reducers';
 import {Route, BrowserRouter} from 'react-router-dom';
+import axios from 'axios';
 
 import './index.css';
 import App from './container/HomePage/HomePage';
 import AddProducts from "./container/AddProcucts/AddProducts";
 import ShoppingCartPage from './container/ShoppingCartPage/ShoppingCartPage';
 import ProductDescription from "./container/ProductDescription/ProductDescription";
-import axios from 'axios';
+import SignIn from './container/SignIn/SignIn';
+import SignUp from "./container/SignUp/SignUp";
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
@@ -28,6 +30,8 @@ ReactDOM.render(
                 <Route exact path="/" component={App}/>
                 <Route exact path="/shopping-cart" component={ShoppingCartPage}/>
                 <Route exact path="/product/:id" component={ProductDescription}/>
+                <Route exact path="/signin" component={SignIn}/>
+                <Route exact path="/signup" component={SignUp}/>
                 <Route path="/admin/addProduct" component={AddProducts}/>
             </Fragment>
         </BrowserRouter>

@@ -15,4 +15,21 @@ export const FILTER_PRODUCTS_BY_CATEGORY = 'filter_products_by_category';
 export const FILTER_PRODUCTS_BY_KEYWORDS = 'filter_products_by_keywords';
 export const GET_PRODUCTS_OF_CART = 'get_products_of_cart';
 
+/*
+
+   ACTION TYPES FOR COMMENTS
+
+ */
+
 export const GET_COMMENTS = 'get_comments';
+
+/*
+
+   ACTION TYPES FOR AUTHORIZATION USERS
+
+ */
+
+export const AUTH_USER = 'auth_user';
+export const USER_ADDED = 'auth_added';
+export const AUTH_ERROR = 'auth_error';
+export const UNAUTH_USER = 'unauth_user';
