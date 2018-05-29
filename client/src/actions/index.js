@@ -212,3 +212,16 @@ export const authError = (error) => {
         payload: error
     }
 };
+
+export const fetchUser = () => async dispatch => {
+    try {
+        // const response = await axios.get('/currency_user');
+        const response = null;
+        //
+        // setToken(response.data.Authorization);
+        // setUserName(response.data.username);
+        response ? dispatch({type: AUTH_USER, payload: response}) : dispatch({type: UNAUTH_USER});
+    } catch (e) {
+        console.error(e);
+    }
+};

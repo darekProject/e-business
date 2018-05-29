@@ -11,7 +11,7 @@ export default function (state = {}, action) {
             return {
                 ...state,
                 authenticated: true,
-                authUser: action.payload
+                authUser: action.payload || null
             };
         case AUTH_ERROR:
             return {

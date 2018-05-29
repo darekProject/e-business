@@ -87,3 +87,22 @@
         transition: all .5s ease;
         margin-top: 35px;
         border-radius: 5px; }
+
+.form-or {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  margin: 30px 0; }
+
+.btn-oauth {
+  height: 40px;
+  width: 200px;
+  color: #ffffff;
+  border-radius: 4px;
+  font-family: "Montserrat", sans-serif;
+  border: none;
+  background: #007bff;
+  font-weight: 600;
+  cursor: pointer; }
+  .btn-oauth img {
+    height: 30px;
+    margin-left: 15px; }

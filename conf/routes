@@ -22,3 +22,7 @@ GET         /assets/*file         controllers.Assets.versioned(path="/public", f
 
 # Category
 POST        /addcategory          controllers.CategoryController.addCategory
+
+# Cart
+POST        /cart/:id             controllers.CartControllers.getCart(id: Int)
+GET         /addcart              controllers.CartControllers.addCart()

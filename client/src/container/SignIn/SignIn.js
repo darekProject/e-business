@@ -60,6 +60,14 @@ class SignIn extends Component {
                                     <button type="submit" className="btn-sign">Sign In</button>
                                 </form>
                                 {this.renderError()}
+                                <span className="form-or">or</span>
+                                <div className="oauth">
+                                    <Link to="/auth/oauth">
+                                        <button className="btn-oauth">
+                                            Log by OAuth<img src="images/oauth-2.png" alt=""/>
+                                        </button>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
