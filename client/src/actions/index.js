@@ -7,12 +7,11 @@ import {
     FILTER_PRODUCTS_BY_KEYWORDS,
     GET_PRODUCTS, GET_PRODUCT,
     GET_PRODUCTS_OF_CART, REMOVE_PRODUCT_TO_SHOPPING_CARTS,
-    ADD_PRODUCTS_TO_SHOPPING_CARTS, GET_COMMENTS
+    ADD_PRODUCTS_TO_SHOPPING_CARTS, GET_COMMENTS,
+    USER_ADDED, AUTH_USER, AUTH_ERROR, UNAUTH_USER
 } from "./type";
-import {MOCK_PRODUCTS} from './Mocks/mock_product';
-import {MOCK_COMMENTS} from './Mocks/mock_comments';
 
-const ROOT_URL = 'http://localhost:9090';
+import {removeToken, setUserName, setToken, removeUserName} from '../utils/token';
 
 export const addProduct = (values) => async dispatch => {
     try {
@@ -161,5 +160,53 @@ export const addCommentToProduct = comment => async dispatch => {
         console.log(response);
     } catch (e) {
         console.error(e)
+    }
+};
+
+export const signUpUser = ({username, email, password}) => async dispatch => {
+
+    try {
+        await axios.post(`/signup`, {
+            username,
+            email,
+            password
+        });
+
+        dispatch({type: USER_ADDED});
+    } catch (e) {
+        return dispatch(authError('Username already exists in the database'));
+    }
+
+};
+
+export const signInUser = ({username, password}) => async dispatch => {
+    try {
+
+        const userData = await axios.post(`/login`,
+            {
+                username,
+                password
+            });
+
+        setToken(userData.data.Authorization);
+        setUserName(userData.data.username);
+        dispatch({type: AUTH_USER, payload: userData.data});
+
+    } catch (e) {
+        console.log(e);
+        return dispatch(authError('Username or password is incorrect!'));
+    }
+};
+
+export const signOutUser = () => {
+    removeToken();
+    removeUserName();
+    return {type: UNAUTH_USER};
+};
+
+export const authError = (error) => {
+    return {
+        type: AUTH_ERROR,
+        payload: error
     }
 };
