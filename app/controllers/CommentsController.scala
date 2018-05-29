@@ -33,7 +33,7 @@ class CommentsController @Inject()(commentsRepo: CommentsRepository,
 
   }
 
-  def getComments(id: Int) = Action.async { implicit request =>
+  def getComments(id: Int): Action[AnyContent] = Action.async { implicit request =>
     var commentsById = new ArrayBuffer[Comments]()
 
     commentsRepo.list().map { comments =>

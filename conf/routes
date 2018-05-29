@@ -8,6 +8,10 @@ GET         /products             controllers.ProductController.getProducts
 GET         /product/:id          controllers.ProductController.getProduct(id: Int)
 GET         /products/key         controllers.ProductController.getProductsByKeyWords
 
+# Comments
+GET         /comments/:id         controllers.CommentsController.getComments(id: Int)
+POST        /addcomment           controllers.CommentsController.addComments()
+
 # Orders
 POST        /addorders            controllers.OrdersController.addOrders()
 GET         /getorders            controllers.OrdersController.getOrders

@@ -41,7 +41,6 @@ class Comments extends Component {
         console.log(values);
         this.addComment(values);
         this.switchModal();
-        this.props.addCommentToProduct(values, this.state.idProduct);
     };
 
     addComment = ({userName, comment}) => {
@@ -59,6 +58,7 @@ class Comments extends Component {
 
         comments.push(newComment);
         this.setState({comments});
+        this.props.addCommentToProduct(newComment);
     };
 
     renderComments = () => {

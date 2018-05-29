@@ -154,14 +154,8 @@ export const getComments = id => async dispatch => {
     }
 };
 
-export const addCommentToProduct = ({userName, comment}, id) => async dispatch => {
+export const addCommentToProduct = comment => async dispatch => {
     try {
-        const comment = {
-            id,
-            content: comment,
-            userName,
-            prodId: id
-        };
 
         const response = await axios.post(`/addcomment`, comment);
         console.log(response);

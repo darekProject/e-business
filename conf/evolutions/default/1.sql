@@ -17,7 +17,7 @@ create table "orders" (
   foreign key(user) references user(id)
 );
 
-create table "product" if not exists (
+create table if not exists "product" (
   "id" integer not null primary key autoincrement,
   "name" varchar not null,
   "description" varchar not null,

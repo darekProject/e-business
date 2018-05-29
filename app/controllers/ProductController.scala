@@ -46,18 +46,18 @@ class ProductController @Inject()(productsRepo: ProductRepository, categoryRepo:
     }
   }
 
-    def getProduct(id: Int) = Action.async { implicit request =>
-      var productsById = new ArrayBuffer[Product]()
+  def getProduct(id: Int) = Action.async { implicit request =>
+    var productsById = new ArrayBuffer[Product]()
 
-      productsRepo.list().map { products =>
-        products.foreach(product => {
-          if (product.id == id) {
-            productsById += product
-          }
-        })
-        Ok(Json.toJson(productsById))
-      }
+    productsRepo.list().map { products =>
+      products.foreach(product => {
+        if (product.id == id) {
+          productsById += product
+        }
+      })
+      Ok(Json.toJson(productsById))
     }
+  }
 
   def getProductsByKeyWords: Action[JsValue] = Action.async(parse.json) { implicit request =>
 
