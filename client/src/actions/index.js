@@ -12,6 +12,7 @@ import {
 } from "./type";
 
 import {removeToken, setUserName, setToken, removeUserName} from '../utils/token';
+import {getCookie} from '../utils/cookie';
 
 export const addProduct = (values) => async dispatch => {
     try {
@@ -123,8 +124,13 @@ export const filterProductsByKeyWords = keywords => dispatch => {
     dispatch({type: FILTER_PRODUCTS_BY_KEYWORDS, payload: keywords});
 };
 
-export const getProductsOfCart = () => async dispatch => {
+export const getProductsOfCart = userID => async dispatch => {
     try {
+
+        if (userID) {
+            const productsInShoppingCartPerUser = await axios.get(`/getCart/${userID}`);
+        }
+
         const productsInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart'));
         const products = [];
 
@@ -215,12 +221,14 @@ export const authError = (error) => {
 
 export const fetchUser = () => async dispatch => {
     try {
-        // const response = await axios.get('/currency_user');
-        const response = null;
-        //
+
+        const {data: response} = await axios.get('/currency_user');
+
+
         // setToken(response.data.Authorization);
         // setUserName(response.data.username);
-        response ? dispatch({type: AUTH_USER, payload: response}) : dispatch({type: UNAUTH_USER});
+        console.log(response);
+        response.userID ? dispatch({type: AUTH_USER, payload: response}) : dispatch({type: UNAUTH_USER});
     } catch (e) {
         console.error(e);
     }

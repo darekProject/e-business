@@ -42,6 +42,25 @@ class Header extends Component {
         }
     };
 
+    checkAuthUser = () => {
+        const {authenticated, authUser} = this.props;
+        if (authenticated) {
+            return (
+                <div className="if-login">
+                    <span>Welcome, {authUser.name}</span>
+                    <a href="http://localhost:9090/signOut">
+                        <img src="/images/logout.png" alt=""/>
+                    </a>
+                </div>)
+        } else {
+            return <Link to="/signIn">
+                <button>
+                    <i className="far fa-user"></i>
+                </button>
+            </Link>
+        }
+    }
+
     render() {
         return <Fragment>
             <div className="container title-cart-box">
@@ -52,17 +71,13 @@ class Header extends Component {
                             <h1>SMART-SHOP</h1>
                         </div>
                         <div id="user">
-                            <Link to="/signIn">
-                                <button>
-                                    <i className="far fa-user"></i>
-                                </button>
-                            </Link>
+                            {this.checkAuthUser()}
                             <ShoppingCart amountProducts={this.state.amountAddedProductToCart}/>
                         </div>
                     </div>
                 </div>
             </div>
-            < Search handleSubmitSearch={(values) => this.handleSubmitSearch(values)} />
+            < Search handleSubmitSearch={(values) => this.handleSubmitSearch(values)}/>
             <Categories/>
         </Fragment>
     }
@@ -70,7 +85,9 @@ class Header extends Component {
 
 const mapStateToProps = state => {
     return {
-        productAddedToShoppingCarts: state.product.productAddedToShoppingCarts
+        productAddedToShoppingCarts: state.product.productAddedToShoppingCarts,
+        authenticated: state.user.authenticated,
+        authUser: state.user.authUser
     }
 };
 

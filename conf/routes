@@ -3,26 +3,44 @@
 # ~~~~
 
 # Products
-POST        /addproduct           controllers.ProductController.addProduct
-GET         /products             controllers.ProductController.getProducts
-GET         /product/:id          controllers.ProductController.getProduct(id: Int)
-GET         /products/key         controllers.ProductController.getProductsByKeyWords
+POST        /addproduct                     controllers.ProductController.addProduct
+GET         /products                       controllers.ProductController.getProducts
+GET         /product/:id                    controllers.ProductController.getProduct(id: Int)
+GET         /products/key                   controllers.ProductController.getProductsByKeyWords
 
 # Comments
-GET         /comments/:id         controllers.CommentsController.getComments(id: Int)
-POST        /addcomment           controllers.CommentsController.addComments()
+GET         /comments/:id                   controllers.CommentsController.getComments(id: Int)
+POST        /addcomment                     controllers.CommentsController.addComments()
 
 # Orders
-POST        /addorders            controllers.OrdersController.addOrders()
-GET         /getorders            controllers.OrdersController.getOrders
-GET         /getorders/:id        controllers.OrdersController.getOrdersByUser(id: Int)
+POST        /addorders                      controllers.OrdersController.addOrders()
+GET         /getorders                      controllers.OrdersController.getOrders
+GET         /getorders/:id                  controllers.OrdersController.getOrdersByUser(id: Int)
 
-# Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file         controllers.Assets.versioned(path="/public", file: Asset)
+## Map static resources from the /public folder to the /assets URL path
+#GET         /assets/*file         controllers.Assets.versioned(path="/public", file: Asset)
 
 # Category
-POST        /addcategory          controllers.CategoryController.addCategory
+POST        /addcategory                    controllers.CategoryController.addCategory
 
 # Cart
-POST        /cart/:id             controllers.CartControllers.getCart(id: Int)
-GET         /addcart              controllers.CartControllers.addCart()
+POST        /cart/:id                       controllers.CartControllers.getCart(id: Int)
+GET         /addcart                        controllers.CartControllers.addCart()
+
+# Home page
+GET         /                               controllers.ApplicationController.index
+GET         /signOut                        controllers.ApplicationController.signOut
+GET         /authenticate/:provider         controllers.SocialAuthController.authenticate(provider)
+
+GET         /currency_user                  controllers.ApplicationController.getCurrencyUser
+GET         /users                          controllers.ApplicationController.getUsers
+
+GET         /signIn                         controllers.SignInController.view
+POST        /signIn                         controllers.SignInController.submit
+
+GET         /account/email/:email           controllers.ActivateAccountController.send(email: String)
+GET         /account/activate/:token        controllers.ActivateAccountController.activate(token: java.util.UUID)
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file                   controllers.Assets.versioned(file)
+->          /webjars                        webjars.Routes

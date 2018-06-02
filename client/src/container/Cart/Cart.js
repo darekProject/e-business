@@ -23,7 +23,15 @@ class Cart extends Component {
     };
 
     componentDidMount() {
-        this.props.getProductsOfCart();
+        let userID = null;
+        const {authenticated, authUser} = this.props;
+        if (authenticated) {
+            userID = authUser.userID;
+        }
+
+        this.props.getProductsOfCart(userID);
+
+
     }
 
     componentWillReceiveProps(nextProps) {
@@ -190,7 +198,9 @@ class Cart extends Component {
 
 const mapStateToProps = state => {
     return {
-        products: state.product.productsOfCart
+        products: state.product.productsOfCart,
+        authenticated: state.user.authenticated,
+        authUser: state.user.authenticated
     }
 };
 

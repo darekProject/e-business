@@ -27,7 +27,7 @@ create table if not exists "product" (
   "category" varchar not null
 );
 
-create table "comments" (
+create table if not exists "comments" (
   "id" integer not null primary key autoincrement,
   "userName" varchar not null,
   "content" varchar not null,
@@ -37,11 +37,11 @@ create table "comments" (
 
 create table "user" (
   "id" integer not null primary key autoincrement,
+  "firstName" varchar not null,
+  "lastName" varchar not null,
   "fullName" varchar not null,
-  "address" varchar not null,
-  "role" integer not null,
-  orders int not null,
-  foreign key(orders) references orders(id)
+  "email" varchar not null,
+  "token" varchar not null
 );
 
 
