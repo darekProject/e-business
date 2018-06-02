@@ -8,11 +8,10 @@ import {
     GET_PRODUCTS, GET_PRODUCT,
     GET_PRODUCTS_OF_CART, REMOVE_PRODUCT_TO_SHOPPING_CARTS,
     ADD_PRODUCTS_TO_SHOPPING_CARTS, GET_COMMENTS,
-    USER_ADDED, AUTH_USER, AUTH_ERROR, UNAUTH_USER
+    USER_ADDED, AUTH_USER, AUTH_ERROR, UNAUTH_USER,
 } from "./type";
 
-import {removeToken, setUserName, setToken, removeUserName} from '../utils/token';
-import {getCookie} from '../utils/cookie';
+import {setUserName, setToken, removeUser, setUserID, getUserID} from '../utils/token';
 
 export const addProduct = (values) => async dispatch => {
     try {
@@ -124,11 +123,17 @@ export const filterProductsByKeyWords = keywords => dispatch => {
     dispatch({type: FILTER_PRODUCTS_BY_KEYWORDS, payload: keywords});
 };
 
-export const getProductsOfCart = userID => async dispatch => {
+export const getProductsOfCart = () => async dispatch => {
     try {
-
+        const userID = getUserID();
         if (userID) {
-            const productsInShoppingCartPerUser = await axios.get(`/getCart/${userID}`);
+            const {data: productsInShoppingCartPerUser} = await axios.get(`/usercart/${userID}`);
+            console.log(productsInShoppingCartPerUser);
+            if (productsInShoppingCartPerUser.length > 0) {
+                localStorage.setItem('productInShoppingCart', JSON.stringify(productsInShoppingCartPerUser.products));
+            } else {
+                localStorage.setItem('productInShoppingCart', JSON.stringify(productsInShoppingCartPerUser));
+            }
         }
 
         const productsInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart'));
@@ -147,7 +152,7 @@ export const getProductsOfCart = userID => async dispatch => {
 
         dispatch({type: GET_PRODUCTS_OF_CART, payload: products});
     } catch (e) {
-        console.warn(e);
+        console.error(e);
     }
 };
 
@@ -206,9 +211,8 @@ export const signInUser = ({username, password}) => async dispatch => {
     }
 };
 
-export const signOutUser = () => {
-    removeToken();
-    removeUserName();
+export const signOut = () => {
+    removeUser();
     return {type: UNAUTH_USER};
 };
 
@@ -228,6 +232,7 @@ export const fetchUser = () => async dispatch => {
         // setToken(response.data.Authorization);
         // setUserName(response.data.username);
         console.log(response);
+        setUserID(response.userID);
         response.userID ? dispatch({type: AUTH_USER, payload: response}) : dispatch({type: UNAUTH_USER});
     } catch (e) {
         console.error(e);

@@ -46,7 +46,7 @@ class Header extends Component {
         const {authenticated, authUser} = this.props;
         if (authenticated) {
             return (
-                <div className="if-login">
+                <div className="if-login" onClick={() => this.props.signOut()}>
                     <span>Welcome, {authUser.name}</span>
                     <a href="http://localhost:9090/signOut">
                         <img src="/images/logout.png" alt=""/>

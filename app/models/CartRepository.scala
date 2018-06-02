@@ -25,14 +25,14 @@ class CartRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implici
 
     def products = column[String]("products")
 
-    def userId = column[Int]("userId")
+    def userId = column[String]("userId")
 
     def * = (id, products, userId) <> ((Cart.apply _).tupled, Cart.unapply)
   }
 
   val cart = TableQuery[CartTable]
 
-  def create(products: String, userId: Int): Future[Cart] = db.run {
+  def create(products: String, userId: String): Future[Cart] = db.run {
     (cart.map(c => (c.products, c.userId))
       returning cart.map(_.id)
       into { case ((`products`, `userId`), id) => Cart(id, products, userId) }

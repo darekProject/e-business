@@ -23,15 +23,7 @@ class Cart extends Component {
     };
 
     componentDidMount() {
-        let userID = null;
-        const {authenticated, authUser} = this.props;
-        if (authenticated) {
-            userID = authUser.userID;
-        }
-
-        this.props.getProductsOfCart(userID);
-
-
+        this.props.getProductsOfCart();
     }
 
     componentWillReceiveProps(nextProps) {

@@ -32,7 +32,7 @@ class CartControllers @Inject()(cartRepo: CartRepository,
     }
   }
 
-  def getCart(id: Int): Action[AnyContent] = Action.async { implicit request =>
+  def getCart(id: String): Action[AnyContent] = Action.async { implicit request =>
     var cartById = new ArrayBuffer[Cart]()
 
     cartRepo.list().map { carts =>

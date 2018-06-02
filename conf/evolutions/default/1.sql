@@ -44,6 +44,11 @@ create table "user" (
   "token" varchar not null
 );
 
+create table "cart" (
+  "id" integer not null primary key autoincrement,
+  "products" varchar not null,
+  "userId" varchar not null
+);
 
 # --- !Downs
 

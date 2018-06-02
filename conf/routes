@@ -24,7 +24,7 @@ GET         /getorders/:id                  controllers.OrdersController.getOrde
 POST        /addcategory                    controllers.CategoryController.addCategory
 
 # Cart
-POST        /cart/:id                       controllers.CartControllers.getCart(id: Int)
+GET       /usercart/:id                       controllers.CartControllers.getCart(id: String)
 GET         /addcart                        controllers.CartControllers.addCart()
 
 # Home page
