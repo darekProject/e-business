@@ -11,7 +11,7 @@ import {
     USER_ADDED, AUTH_USER, AUTH_ERROR, UNAUTH_USER,
 } from "./type";
 
-import {setUserName, setToken, removeUser, setUserID, getUserID} from '../utils/token';
+import {setUserName, setToken, removeUser, setUserID, getUserID, removeUserName, removeCart} from '../utils/token';
 
 export const addProduct = (values) => async dispatch => {
     try {
@@ -32,56 +32,97 @@ const failedProduct = (error) => {
     }
 };
 
-export const addProductToShoppingCart = idProduct => dispatch => {
+export const addProductToShoppingCart = idProduct => async dispatch => {
+    try {
+        const arrayProductInShoppingCart = [];
+        const productInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart'));
 
-    const arrayProductInShoppingCart = [];
-    const productInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart'));
+        if (productInShoppingCart) {
+            arrayProductInShoppingCart.push(...productInShoppingCart, idProduct);
+        } else {
+            arrayProductInShoppingCart.push(idProduct);
+        }
 
-    if (productInShoppingCart) {
-        arrayProductInShoppingCart.push(...productInShoppingCart, idProduct);
-    } else {
-        arrayProductInShoppingCart.push(idProduct);
+        localStorage.setItem('productInShoppingCart', JSON.stringify(arrayProductInShoppingCart));
+
+        await updateCartPerUser(arrayProductInShoppingCart);
+
+        const payload = {idProduct, timestamp: Date.now()};
+        dispatch({type: ADD_PRODUCT_TO_SHOPPING_CARTS, payload});
+    } catch (e) {
+        console.error(e)
     }
-
-    localStorage.setItem('productInShoppingCart', JSON.stringify(arrayProductInShoppingCart));
-
-    const payload = {idProduct, timestamp: Date.now()};
-    dispatch({type: ADD_PRODUCT_TO_SHOPPING_CARTS, payload});
 };
 
-export const addProductsToShoppingCart = (idProduct, quantity) => dispatch => {
-    const productInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart'));
+export const updateCartPerUser = async products => {
+    try {
+        const existingUser = getUserID();
+        if (existingUser) {
 
-    for (let i = 0; i < quantity; i++) {
-        productInShoppingCart.push(idProduct);
+            const data = {
+                userID: existingUser,
+                products: JSON.stringify(products)
+            };
+
+            const response = await axios.post('/addcart', data);
+            console.log(response);
+        } else {
+            console.log("USER NOT LOGGED!")
+        }
+    } catch (e) {
+        console.log(e);
     }
-
-    localStorage.setItem('productInShoppingCart', JSON.stringify(productInShoppingCart));
-
-    const payload = {idProduct, timestamp: Date.now()};
-    dispatch({type: ADD_PRODUCTS_TO_SHOPPING_CARTS, payload});
 };
 
-export const removeProductOfShoppingCart = (idProduct, force = false) => dispatch => {
-    const productInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart'));
+export const addProductsToShoppingCart = (idProduct, quantity) => async dispatch => {
 
-    if (productInShoppingCart) {
-        const cartIndex = productInShoppingCart.findIndex(prod => prod === idProduct);
-        if (force) {
-            const amountProductInCart = productInShoppingCart.filter(prod => prod === idProduct);
-            for (let i = 0; i < amountProductInCart.length; i++) {
-                const cartIndex = productInShoppingCart.findIndex(prod => prod === idProduct);
+    try {
+
+        const productInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart'));
+
+        for (let i = 0; i < quantity; i++) {
+            productInShoppingCart.push(idProduct);
+        }
+
+        localStorage.setItem('productInShoppingCart', JSON.stringify(productInShoppingCart));
+
+        await updateCartPerUser(productInShoppingCart);
+
+        const payload = {idProduct, timestamp: Date.now()};
+        dispatch({type: ADD_PRODUCTS_TO_SHOPPING_CARTS, payload});
+
+    } catch (e) {
+        console.error(e)
+    }
+};
+
+export const removeProductOfShoppingCart = (idProduct, force = false) => async dispatch => {
+
+    try {
+        const productInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart'));
+
+        if (productInShoppingCart) {
+            const cartIndex = productInShoppingCart.findIndex(prod => prod === idProduct);
+            if (force) {
+                const amountProductInCart = productInShoppingCart.filter(prod => prod === idProduct);
+                for (let i = 0; i < amountProductInCart.length; i++) {
+                    const cartIndex = productInShoppingCart.findIndex(prod => prod === idProduct);
+                    productInShoppingCart.splice(cartIndex, 1);
+                }
+            } else {
                 productInShoppingCart.splice(cartIndex, 1);
             }
-        } else {
-            productInShoppingCart.splice(cartIndex, 1);
         }
+
+        localStorage.setItem('productInShoppingCart', JSON.stringify(productInShoppingCart));
+
+        await updateCartPerUser(productInShoppingCart);
+
+        const payload = {idProduct, timestamp: Date.now()};
+        dispatch({type: REMOVE_PRODUCT_TO_SHOPPING_CARTS, payload});
+    } catch (e) {
+        console.log(e);
     }
-
-    localStorage.setItem('productInShoppingCart', JSON.stringify(productInShoppingCart));
-
-    const payload = {idProduct, timestamp: Date.now()};
-    dispatch({type: REMOVE_PRODUCT_TO_SHOPPING_CARTS, payload});
 };
 
 export const getProducts = () => async dispatch => {
@@ -125,17 +166,6 @@ export const filterProductsByKeyWords = keywords => dispatch => {
 
 export const getProductsOfCart = () => async dispatch => {
     try {
-        const userID = getUserID();
-        if (userID) {
-            const {data: productsInShoppingCartPerUser} = await axios.get(`/usercart/${userID}`);
-            console.log(productsInShoppingCartPerUser);
-            if (productsInShoppingCartPerUser.length > 0) {
-                localStorage.setItem('productInShoppingCart', JSON.stringify(productsInShoppingCartPerUser.products));
-            } else {
-                localStorage.setItem('productInShoppingCart', JSON.stringify(productsInShoppingCartPerUser));
-            }
-        }
-
         const productsInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart'));
         const products = [];
 
@@ -213,6 +243,8 @@ export const signInUser = ({username, password}) => async dispatch => {
 
 export const signOut = () => {
     removeUser();
+    removeUserName();
+    removeCart();
     return {type: UNAUTH_USER};
 };
 
@@ -228,12 +260,24 @@ export const fetchUser = () => async dispatch => {
 
         const {data: response} = await axios.get('/currency_user');
 
+        if (response.userID) {
+            console.log(response.userID);
+            if (response.userID) {
+                const {data: productsInShoppingCartPerUser} = await axios.get(`/usercart/${response.userID}`);
+                console.log(productsInShoppingCartPerUser);
+                if (productsInShoppingCartPerUser.length > 0) {
+                    localStorage.setItem('productInShoppingCart', productsInShoppingCartPerUser[0].products);
+                } else {
+                    localStorage.setItem('productInShoppingCart', JSON.stringify(productsInShoppingCartPerUser));
+                }
+            }
 
-        // setToken(response.data.Authorization);
-        // setUserName(response.data.username);
-        console.log(response);
-        setUserID(response.userID);
-        response.userID ? dispatch({type: AUTH_USER, payload: response}) : dispatch({type: UNAUTH_USER});
+            setUserID(response.userID);
+            setUserName(response.name);
+            dispatch({type: AUTH_USER, payload: response});
+        } else {
+            dispatch({type: UNAUTH_USER})
+        }
     } catch (e) {
         console.error(e);
     }

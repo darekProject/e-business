@@ -8,6 +8,7 @@ import Search from "../../components/Search/Search";
 import ShoppingCart from '../../components/ShoppingCart/ShoppingCart';
 
 import './Header.css';
+import {getUserName} from "../../utils/token";
 
 class Header extends Component {
 
@@ -43,11 +44,12 @@ class Header extends Component {
     };
 
     checkAuthUser = () => {
-        const {authenticated, authUser} = this.props;
+        const {authenticated} = this.props;
+        const name = getUserName();
         if (authenticated) {
             return (
                 <div className="if-login" onClick={() => this.props.signOut()}>
-                    <span>Welcome, {authUser.name}</span>
+                    <span>Welcome, {name}</span>
                     <a href="http://localhost:9090/signOut">
                         <img src="/images/logout.png" alt=""/>
                     </a>
@@ -59,7 +61,7 @@ class Header extends Component {
                 </button>
             </Link>
         }
-    }
+    };
 
     render() {
         return <Fragment>
@@ -85,7 +87,7 @@ class Header extends Component {
 
 const mapStateToProps = state => {
     return {
-        productAddedToShoppingCarts: state.product.productAddedToShoppingCarts,
+        productAddedToShoppingCarts: state.product.productAddedToShoppingCarts || state.user.productAddedToShoppingCarts,
         authenticated: state.user.authenticated,
         authUser: state.user.authUser
     }

@@ -42,4 +42,8 @@ class CartRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implici
   def list(): Future[Seq[Cart]] = db.run {
     cart.result
   }
+
+  def updateById(id: Int, row: Cart): Future[Int] = db.run {
+    cart.filter(_.id === id).update(row)
+  }
 }

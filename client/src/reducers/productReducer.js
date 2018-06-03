@@ -43,7 +43,8 @@ export default function (state = {}, action) {
         case GET_PRODUCTS_OF_CART: {
             return {
                 ...state,
-                productsOfCart: action.payload
+                productsOfCart: action.payload,
+                productAddedToShoppingCarts: action.payload
             }
         }
         case FILTER_PRODUCTS_BY_CATEGORY: {

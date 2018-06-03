@@ -36,6 +36,7 @@ import scala.collection.mutable.ArrayBuffer
   */
 class ApplicationController @Inject()(
                                        userCustomRepo: UserCustomRepository,
+                                       cartRepo: CartRepository,
                                        components: ControllerComponents,
                                        silhouette: Silhouette[DefaultEnv]
                                      )(
@@ -87,6 +88,30 @@ class ApplicationController @Inject()(
       Ok(Json.toJson(users))
     }
   }
+
+  def addCart(): Action[AnyContent] = Action.async { implicit request =>
+
+    val products = request.body.asJson.get("products").as[String]
+    val userID = request.body.asJson.get("userID").as[String]
+    var existingCart: Cart = null
+
+    cartRepo.list().map { carts =>
+      carts.foreach(cart => {
+        if (cart.userId == userID) {
+          existingCart = cart
+        }
+      })
+
+      if (existingCart == null) {
+        cartRepo.create(products, userID)
+      } else {
+        val newCart: Cart = Cart(id = existingCart.id, products = products, userId = userID)
+        cartRepo.updateById(existingCart.id, newCart)
+      }
+      Ok(Json.toJson("success" -> "OK"))
+    }
+  }
+
 
   /**
     * Handles the Sign Out action.

@@ -1,6 +1,7 @@
 const TOKEN = 'token';
 const USER_NAME = 'username';
 const USER_ID = 'userID';
+const CART = 'productInShoppingCart';
 
 export const setToken = (token) => localStorage.setItem(TOKEN, token);
 
@@ -19,3 +20,5 @@ export const removeToken = () => localStorage.removeItem(TOKEN);
 export const removeUserName = () => localStorage.removeItem(USER_NAME);
 
 export const removeUser = () => localStorage.removeItem(USER_ID);
+
+export const removeCart = () => localStorage.removeItem(CART);

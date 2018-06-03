@@ -15,6 +15,8 @@ import ShoppingCartPage from './container/ShoppingCartPage/ShoppingCartPage';
 import ProductDescription from "./container/ProductDescription/ProductDescription";
 import SignIn from './container/SignIn/SignIn';
 import SignUp from "./container/SignUp/SignUp";
+import {getUserID} from "./utils/token";
+import {AUTH_USER} from "./actions/type";
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
@@ -22,6 +24,11 @@ const store = createStoreWithMiddleware(reducers);
 window.axios = require('axios');
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+const userIsLogged = getUserID();
+
+if (userIsLogged) {
+    store.dispatch({type: AUTH_USER});
+}
 
 ReactDOM.render(
     <Provider store={store}>
