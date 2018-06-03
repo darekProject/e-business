@@ -5,16 +5,21 @@ import * as actions from "../../actions";
 import {connect} from "react-redux";
 
 import './CommentsModal.css'
+import {getUserName} from "../../utils/token";
 
 class CommentsModal extends Component {
 
-    renderField = ({input, label, type, meta: {touched, error, warning}}) => (
-        <Fragment>
+    renderField = ({input, label, type, meta: {touched, error, warning}}) => {
+        if (getUserName()) {
+            input.value = getUserName();
+        }
+
+        return <Fragment>
             <input {...input} placeholder={label} type={type}/>
-            {touched && ((error && <span className="error-comment">{error}</span>) || (warning &&
-                <span className="error-comment">{warning}</span>))}
+            {(error && <span className="error-comment">{error}</span>) || (warning &&
+                <span className="error-comment">{warning}</span>)}
         </Fragment>
-    );
+    };
 
     renderFieldText = ({input, label, type, meta: {touched, error, warning}}) => (
         <Fragment>
@@ -26,7 +31,6 @@ class CommentsModal extends Component {
 
     render() {
         const {handleSubmit} = this.props;
-
         return (
             <Modal visible={this.props.modalVisible} onClickBackdrop={() => this.props.modalBackdropClicked()}>
                 <div className="modal-header">
@@ -71,7 +75,7 @@ class CommentsModal extends Component {
 const validate = values => {
     const errors = {};
     if (!values.userName) {
-        errors.userName = 'Give the number'
+        errors.userName = 'Give the name!'
     } else if (!values.comment) {
         errors.comment = 'Give a message!';
     }

@@ -78,7 +78,7 @@ export const addProductsToShoppingCart = (idProduct, quantity) => async dispatch
 
     try {
 
-        const productInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart'));
+        const productInShoppingCart = JSON.parse(localStorage.getItem('productInShoppingCart')) || [];
 
         for (let i = 0; i < quantity; i++) {
             productInShoppingCart.push(idProduct);

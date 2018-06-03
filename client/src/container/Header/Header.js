@@ -37,7 +37,7 @@ class Header extends Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.productAddedToShoppingCarts) {
             const addedProduct = JSON.parse(localStorage.getItem('productInShoppingCart'));
-            const amountAddedProduct = addedProduct.length;
+            const amountAddedProduct = addedProduct ? addedProduct.length : 0;
 
             this.setState({amountAddedProductToCart: amountAddedProduct});
         }

@@ -35,6 +35,8 @@ class Comments extends Component {
                 comments
             }
         }
+
+        return null;
     }
 
     handleSubmitAddComments = (values) => {
